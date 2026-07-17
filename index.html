@@ -6,17 +6,20 @@
 <title>今晚吃什么？南京美食决策器 💕</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:linear-gradient(180deg,#FFf5f5,#FFf0eb);min-height:100vh;color:#2D2D2D}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:linear-gradient(180deg,#FFF5F5,#FFF0EB);min-height:100vh;color:#2D2D2D}
 .max-w-4xl{max-width:900px;margin:0 auto}.mx-auto{margin:0 auto}.px-4{padding-left:16px;padding-right:16px}.pt-6{padding-top:24px}.pb-20{padding-bottom:80px}
-.text-center{text-align:center}.mb-8{margin-bottom:32px}.mb-6{margin-bottom:24px}.mb-4{margin-bottom:16px}.mb-3{margin-bottom:12px}.mb-2{margin-bottom:8px}.mb-1{margin-bottom:4px}.mt-1{margin-top:4px}.mt-3{margin-top:12px}.gap-1{gap:4px}.gap-2{gap:8px}
+.text-center{text-align:center}.mb-8{margin-bottom:32px}.mb-6{margin-bottom:24px}.mb-5{margin-bottom:20px}.mb-4{margin-bottom:16px}.mb-3{margin-bottom:12px}.mb-2{margin-bottom:8px}.mb-1{margin-bottom:4px}.mt-1{margin-top:4px}.mt-3{margin-top:12px}.gap-1{gap:4px}.gap-2{gap:8px}.gap-3{gap:12px}
 .inline-flex{display:inline-flex}.items-center{align-items:center}.flex-wrap{flex-wrap:wrap}.flex{display:flex}.shrink-0{flex-shrink:0}
 .grid{display:grid;grid-template-columns:1fr;gap:16px}
 @media(min-width:640px){.grid{grid-template-columns:1fr 1fr}}
 @media(min-width:1024px){.grid{grid-template-columns:1fr 1fr 1fr}}
 .text-4xl{font-size:36px}.text-2xl{font-size:24px}.text-sm{font-size:14px}.text-xs{font-size:12px}
 .font-bold{font-weight:700}.font-medium{font-weight:500}.font-semibold{font-weight:600}
-.rounded-full{border-radius:9999px}.rounded-xl{border-radius:12px}.rounded-lg{border-radius:8px}
-.px-3{padding-left:12px;padding-right:12px}.py-1{padding-top:4px;padding-bottom:4px}.py-1-5{padding-top:6px;padding-bottom:6px}
+.rounded-full{border-radius:9999px}.rounded-xl{border-radius:12px}.rounded-lg{border-radius:8px}.rounded-2xl{border-radius:16px}
+.px-3{padding-left:12px;padding-right:12px}.py-1{padding-top:4px;padding-bottom:4px}
+.hidden{display:none!important}
+button{cursor:pointer;font-family:inherit}
+button:focus{outline:none}
 
 /* Intro gate */
 .intro-gate{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#FFF5F5,#FFF0EB);transition:opacity .35s}
@@ -25,18 +28,81 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 .intro-q{font-size:26px;font-weight:700;color:#2D2D2D;line-height:1.6;margin-bottom:32px}
 .intro-btns{position:relative;display:flex;gap:28px;justify-content:center;align-items:center;min-height:56px}
-.intro-yes{padding:13px 40px;border-radius:999px;background:linear-gradient(135deg,#FF6B8A,#FF9A7B);color:#fff;font-weight:600;font-size:15px;border:none;cursor:pointer;box-shadow:0 8px 24px rgba(255,107,138,.32);transition:transform .15s}
+.intro-yes{padding:13px 40px;border-radius:999px;background:linear-gradient(135deg,#FF6B8A,#FF9A7B);color:#fff;font-weight:600;font-size:15px;border:none;box-shadow:0 8px 24px rgba(255,107,138,.32);transition:transform .15s}
 .intro-yes:active{transform:scale(.96)}
-.intro-no{padding:13px 40px;border-radius:999px;background:#fff;color:#999;border:1.5px solid #FFB4C0;font-weight:600;font-size:15px;cursor:pointer;transition:all .15s}
+.intro-no{padding:13px 40px;border-radius:999px;background:#fff;color:#999;border:1.5px solid #FFB4C0;font-weight:600;font-size:15px;transition:all .15s}
 .intro-no.flee{position:fixed;transition:top .25s ease,left .25s ease;z-index:101}
 
-/* Category buttons */
-.cat-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:12px;font-size:13px;font-weight:500;background:#fff;color:#888;border:1.5px solid #FFE0E6;cursor:pointer;transition:all .15s}
-.cat-btn.active,.budget-btn.active,.district-btn.active{background:linear-gradient(135deg,#FF6B8A,#FF9A7B);color:#fff;border-color:transparent;box-shadow:0 4px 12px rgba(255,107,138,.25)}
+/* Filter buttons */
+.cat-btn,.budget-btn,.district-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:12px;font-size:13px;font-weight:500;background:#fff;color:#666;border:1.5px solid #FFE0E6;transition:all .15s}
+.cat-btn .emoji{font-size:15px}
+.cat-btn.active,.budget-btn.active,.district-btn.active{background:linear-gradient(135deg,#FF6B8A,#FF9A7B)!important;color:#fff!important;border-color:transparent!important;box-shadow:0 4px 12px rgba(255,107,138,.25)}
+.cat-btn:hover:not(.active),.budget-btn:hover:not(.active),.district-btn:hover:not(.active){border-color:#FF6B8A;color:#FF6B8A}
 .cat-btn:active,.budget-btn:active,.district-btn:active{transform:scale(.95)}
-.cat-btn .emoji{font-size:15px}</style>
+
+/* Sub tag chips */
+.sub-tag{padding:5px 12px;border-radius:999px;font-size:12px;background:#FFF0F3;color:#FF6B8A;border:1px solid #FFB4C0;cursor:pointer;transition:all .15s}
+.sub-tag.active{background:#FF6B8A;color:#fff}
+
+/* Shop card */
+.shop-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 12px rgba(255,107,138,.08);cursor:pointer;transition:transform .2s,box-shadow .2s}
+.shop-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(255,107,138,.18)}
+.shop-cover{height:120px;display:flex;align-items:center;justify-content:center;font-size:48px;position:relative;overflow:hidden}
+.shop-cover img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.shop-cover .emoji-fallback{position:relative;z-index:1}
+.shop-info{padding:14px}
+.shop-name{font-size:15px;font-weight:600;color:#2D2D2D;margin-bottom:4px;line-height:1.4}
+.shop-meta{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px;font-size:11px;color:#888}
+.shop-meta span{display:inline-flex;align-items:center;gap:3px}
+.budget-badge{padding:2px 8px;border-radius:6px;font-size:11px;font-weight:500}
+.b-0{background:#F0F0F0;color:#888}
+.b-1{background:#E8F5E9;color:#2E7D32}
+.b-2{background:#E3F2FD;color:#1565C0}
+.b-3{background:#FFF3E0;color:#E65100}
+.b-4{background:#FCE4EC;color:#AD1457}
+.shop-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:8px;border-top:1px solid #F5F5F5;font-size:11px;color:#999}
+.shop-rating{color:#FF6B8A;font-weight:600}
+.shop-distance{display:inline-flex;align-items:center;gap:2px}
+
+/* Modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:none;align-items:flex-end;justify-content:center}
+.modal-overlay.show{display:flex}
+@media(min-width:640px){.modal-overlay{align-items:center}}
+.modal-card{background:#fff;width:100%;max-width:480px;max-height:90vh;overflow-y:auto;border-radius:20px 20px 0 0;padding:0;animation:slideUp .3s ease}
+@media(min-width:640px){.modal-card{border-radius:20px}}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.modal-cover{height:160px;display:flex;align-items:center;justify-content:center;font-size:64px;position:relative}
+.modal-cover img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;border-radius:20px 20px 0 0}
+.modal-cover .emoji-fallback{position:relative;z-index:1}
+.modal-body{padding:20px}
+.modal-name{font-size:20px;font-weight:700;margin-bottom:8px}
+.modal-subcat{font-size:13px;color:#888;margin-bottom:12px}
+.modal-meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;font-size:13px}
+.modal-meta-item{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;background:#FFF0F3;color:#FF6B8A;border-radius:8px}
+.modal-desc{font-size:14px;color:#555;line-height:1.6;margin-bottom:16px}
+.modal-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.modal-tag{padding:4px 10px;background:#F5F5F5;color:#666;border-radius:6px;font-size:12px}
+.modal-btns{display:flex;gap:10px;padding:0 20px 20px}
+.modal-btn{flex:1;padding:12px;border-radius:12px;font-size:14px;font-weight:600;text-align:center;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px;border:none}
+.modal-btn-dp{background:#FFB800;color:#fff}
+.modal-btn-mt{background:#FFC0CB;color:#fff}
+.modal-btn-close{position:absolute;top:16px;right:16px;width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,.5);color:#fff;border:none;font-size:18px;z-index:10}
+
+/* Spin section */
+.spin-section{text-align:center;margin:24px 0;padding:20px;background:linear-gradient(135deg,#FFF0F3,#FFEDE0);border-radius:16px}
+.spin-btn{padding:14px 36px;border-radius:999px;background:linear-gradient(135deg,#FF6B8A,#FF9A7B);color:#fff;font-size:16px;font-weight:600;border:none;box-shadow:0 8px 24px rgba(255,107,138,.3);transition:transform .15s}
+.spin-btn:active{transform:scale(.96)}
+.spin-btn:disabled{opacity:.6;cursor:wait}
+
+/* Result highlight */
+.spin-result{background:linear-gradient(135deg,#FFF0F3,#FFEDE0);border-radius:16px;padding:16px;margin:16px 0;text-align:center;border:2px dashed #FF6B8A}
+.spin-result .name{font-size:18px;font-weight:700;color:#FF6B8A;margin-bottom:6px}
+.spin-result .meta{font-size:13px;color:#666}
+</style>
 </head>
 <body>
+
+<!-- Intro gate -->
 <div id="introGate" class="intro-gate">
   <div class="intro-card">
     <div class="intro-emoji">💕</div>
@@ -48,6 +114,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   </div>
 </div>
 
+<!-- Main content -->
 <div class="max-w-4xl mx-auto px-4 pt-6 pb-20">
   <header class="text-center mb-8 pt-4">
     <div class="text-4xl mb-2">🍜</div>
@@ -63,68 +130,2138 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div class="flex flex-wrap gap-2" id="categoryRow"></div>
   </section>
 
-  <section class="mb-4">
+  <section class="mb-5">
     <p class="text-xs font-medium tracking-widest mb-2" style="color:#CCC;">— 预算范围 —</p>
     <div class="flex flex-wrap gap-2" id="budgetRow"></div>
   </section>
 
-  <section class="mb-4" id="districtSection">
+  <section class="mb-5">
     <p class="text-xs font-medium tracking-widest mb-2" style="color:#CCC;">— 离你近一点 —</p>
     <div class="flex flex-wrap gap-2" id="districtRow"></div>
   </section>
 
+  <div class="flex items-center gap-2 mb-4">
+    <button onclick="useMyLocation()" id="locBtn" class="text-xs px-3 py-1 rounded-full font-medium" style="background:#FFF0F3;color:#FF6B8A;border:1.5px solid #FFB4C0">📍 用我的位置</button>
+    <span id="locStatus" class="text-xs" style="color:#999">距望江悦府</span>
+  </div>
+
+  <div class="flex items-center justify-between mb-3">
+    <span id="resultCount" class="text-sm font-medium" style="color:#555"></span>
+    <div class="flex flex-wrap gap-1.5" id="subTagRow"></div>
+  </div>
+
   <div class="grid" id="cardGrid"></div>
 
   <div class="text-center py-16 hidden" id="emptyState">
-    <div style="font-size:48px;margin-bottom:12px;">🍽️</div>
-    <p class="font-medium mb-1" style="color:#555;">这个分类下还没有店铺</p>
-    <p class="text-sm" style="color:#BBB;">去别处看看？</p>
+    <div style="font-size:48px;margin-bottom:12px">🍽️</div>
+    <p class="font-medium mb-1" style="color:#555">这个筛选下还没有店铺</p>
+    <p class="text-sm" style="color:#BBB">换个分类试试？</p>
+  </div>
+
+  <div class="spin-section" id="spinSection">
+    <button class="spin-btn" id="spinBtn" onclick="spinRandom()">🎲 随机抽一个</button>
+    <p class="text-xs mt-2" style="color:#999">摇出今晚的答案</p>
+  </div>
+
+  <div id="spinResult" class="spin-result hidden"></div>
+</div>
+
+<!-- Shop detail modal -->
+<div class="modal-overlay" id="modal" onclick="if(event.target.id==='modal')closeModal()">
+  <div class="modal-card" id="modalCard">
+    <button class="modal-btn-close" onclick="closeModal()">×</button>
+    <div class="modal-cover" id="modalCover"></div>
+    <div class="modal-body">
+      <h2 class="modal-name" id="modalName"></h2>
+      <p class="modal-subcat" id="modalSubCat"></p>
+      <div class="modal-meta" id="modalMeta"></div>
+      <p class="modal-desc" id="modalDesc"></p>
+      <div class="modal-tags" id="modalTags"></div>
+    </div>
+    <div class="modal-btns">
+      <a class="modal-btn modal-btn-dp" id="modalDianping" target="_blank">🔍 大众点评</a>
+      <a class="modal-btn modal-btn-mt" id="modalMeituan" target="_blank">🔍 美团</a>
+    </div>
   </div>
 </div>
 
 <script>
-const BUDGETS = [
-  { label:"全部", value:"全部" },
-  { label:"100以下", value:"100以下" },
-  { label:"100-200", value:"100-200" },
-  { label:"200-300", value:"200-300" },
-  { label:"300以上", value:"300以上" },
+const shops = [
+
+  // ── 火锅 ─────────────────────────────────────────
+  {
+    id: 1, name: "海底捞火锅（鼓楼店）", emoji: "🍲",
+    category: "火锅", subCategory: "川渝火锅", budget: "200-300",
+    avgPrice: 104, rating: 4.7,
+    district: "鼓楼区", distance: 9.9, lng: 118.743305, lat: 32.093682,
+    address: "建宁路300号大观天地MALL2楼", desc: "服务天花板，等位有小零食+美甲，过生日有惊喜。锅底选择多，番茄锅适合不太能吃辣的情侣，毛肚必点。",
+    tags: ["服务好","过生日","番茄锅必点"], recommend: ["必吃榜","好评优先"],
+    cover: "https://images.unsplash.com/photo-1568625365131-079e026a927e?w=600&q=80"
+  },
+  {
+    id: 2, name: "傣妹火锅（夫子庙店）", emoji: "🔥",
+    category: "火锅", subCategory: "串串香", budget: "100以下",
+    avgPrice: 68, rating: 4.5,
+    district: "秦淮区", distance: 13.8, lng: 118.788719, lat: 32.019665,
+    address: "夫子庙贡院街瞻园路188号3楼", desc: "平价串串火锅，学生党最爱。菜品种类多，锅底够味，人均70吃撑，适合随便吃点不想动脑子的时候。",
+    tags: ["平价","串串","夫子庙逛完吃"], recommend: ["人气高"],
+    cover: "https://images.unsplash.com/photo-1553163147-622ab57be1c7?w=600&q=80"
+  },
+  {
+    id: 3, name: "辣当家·重庆老火锅", emoji: "🌶️",
+    category: "火锅", subCategory: "川渝火锅", budget: "100-200",
+    avgPrice: 80, rating: 4.7,
+    district: "秦淮区", distance: 15.8, lng: 118.813635, lat: 32.031203,
+    address: "瑞阳街18-5号", desc: "正宗重庆牛油锅底，九宫格，辣得过瘾。鸭血、黄喉、嫩牛肉必点，环境有重庆老店的市井感。",
+    tags: ["正宗牛油","九宫格","够辣"], recommend: ["好评优先","人气高"],
+    cover: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80"
+  },
+  {
+    id: 4, name: "潮汕八合里海记牛肉", emoji: "🥩",
+    category: "火锅", subCategory: "潮汕牛肉", budget: "200-300",
+    avgPrice: 95, rating: 4.6,
+    district: "秦淮区", distance: 12.5, lng: 118.77919, lat: 32.041509,
+    address: "汉中路101号金鹰国际购物中心B08层B-F8002", desc: "新鲜现切牛肉，吊龙、匙柄、五花趾……清汤锅底涮出鲜甜本味，吃过一次就忘不了什么叫好牛肉。",
+    tags: ["现切鲜肉","清汤锅底","品质高"], recommend: ["必吃榜","好评优先"],
+    cover: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=600&q=80"
+  },
+  {
+    id: 5, name: "辣斗辣火锅（百家湖）", emoji: "🍲",
+    category: "火锅", subCategory: "川渝火锅", budget: "100-200",
+    avgPrice: 51, rating: 4.5,
+    district: "秦淮区", distance: 14.3, lng: 118.797235, lat: 32.033643,
+    address: "常府街48号(近长白街)", desc: "网红火锅店，装修风格适合拍照，锅底香而不燥。小酥肉、红糖糍粑是特色，适合约会+美食两不误。",
+    tags: ["网红店","适合拍照","小酥肉"], recommend: ["人气高"],
+    cover: "https://images.unsplash.com/photo-1568625365131-079e026a927e?w=600&q=80"
+  },
+  {
+    id: 6, name: "杨国福麻辣烫（新街口）", emoji: "🥘",
+    category: "火锅", subCategory: "麻辣烫", budget: "100以下",
+    avgPrice: 30, rating: 4.4,
+    district: "秦淮区", distance: 12.8, lng: 118.782245, lat: 32.03801,
+    address: "丰富路150号103-2-3", desc: "自选菜品的麻辣烫，按签子数结账。品类丰富，辣度可控，便宜快食，适合不想等位的情侣。",
+    tags: ["自选","便宜","快速"], recommend: ["人气高"],
+    cover: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=600&q=80"
+  },
+  {
+    id: 7, name: "谭鸭血老火锅", emoji: "🩸",
+    category: "火锅", subCategory: "川渝火锅", budget: "100-200",
+    avgPrice: NaN, rating: 3.5,
+    district: "雨花台区", distance: 16, lng: 118.652516, lat: 31.911694,
+    address: "古雄大道211号吾悦广场(南京雨花店)F7层", desc: "网红鸭血火锅，开锅先喝鸭血汤。锅底加了醪糟和卤料，香气足，鸭血、卤豆腐是特色。",
+    tags: ["鸭血","网红","卤味"], recommend: ["人气高","好评优先"],
+    cover: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80"
+  },
+  {
+    id: 8, name: "七欣天品蟹轩", emoji: "🦀",
+    category: "火锅", subCategory: "海鲜火锅", budget: "200-300",
+    avgPrice: 126, rating: 4.6,
+    district: "鼓楼区", distance: 11.8, lng: 118.772617, lat: 32.066564,
+    address: "中山北路105-6号中环国际广场一层102二层203室", desc: "螃蟹火锅专门店，青蟹现杀现煮，蟹肉饱满鲜甜。先吃蟹再涮菜，一锅两吃，适合海鲜控情侣。",
+    tags: ["螃蟹","海鲜","一锅两吃"], recommend: ["必吃榜","好评优先"],
+    cover: "https://images.unsplash.com/photo-1568625365131-079e026a927e?w=600&q=80"
+  },
+  {
+    id: 9, name: "凑凑火锅·茶憩", emoji: "🍵",
+    category: "火锅", subCategory: "台式火锅", budget: "200-300",
+    avgPrice: 104, rating: 4.6,
+    district: "秦淮区", distance: 12.9, lng: 118.783625, lat: 32.040875,
+    address: "中山南路2号东方福来德F6-001", desc: "台式火锅+手摇茶，鸭血豆腐无限量，大红袍奶茶是招牌。环境安静适合聊天，约会不尴尬。",
+    tags: ["鸭血免费","奶茶","环境好"], recommend: ["必吃榜","环境榜TOP"],
+    cover: "https://images.unsplash.com/photo-1568625365131-079e026a927e?w=600&q=80"
+  },
+  {
+    id: 10, name: "大龙燚火锅", emoji: "🌶️",
+    category: "火锅", subCategory: "川渝火锅", budget: "100-200",
+    avgPrice: 113, rating: 4.4,
+    district: "溧水区", distance: 58.3, lng: 119.035736, lat: 31.646825,
+    address: "永阳街道中山路66号附12号", desc: "成都来的老火锅，牛油锅底厚重香浓，麻辣牛肉、老肉片是必点。辣度可以选，适合无辣不欢。",
+    tags: ["成都","牛油","麻辣牛肉"], recommend: ["好评优先"],
+    cover: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80"
+  },
+  {
+    id: 11, name: "巴奴毛肚火锅", emoji: "🥬",
+    category: "火锅", subCategory: "川渝火锅", budget: "200-300",
+    avgPrice: 123, rating: 4.7,
+    district: "秦淮区", distance: 12.5, lng: 118.779545, lat: 32.041534,
+    address: "汉中路89号金鹰国际购物中心B座八层B-01", desc: "服务对标海底捞，毛肚是灵魂——选自特定部位，七上八下脆嫩弹牙。菌汤锅底鲜掉眉毛。",
+    tags: ["毛肚","菌汤","服务好"], recommend: ["必吃榜","好评优先"],
+    cover: "https://images.unsplash.com/photo-1568625365131-079e026a927e?w=600&q=80"
+  },
+  // ── 烤肉 ─────────────────────────────────────────
+  {
+    id: 12, name: "牛角烧肉（日本人が爱吃）", emoji: "🥩",
+    category: "烤肉", subCategory: "日式烧肉", budget: "200-300",
+    avgPrice: NaN, rating: 4.2,
+    district: "建邺区", distance: 9.3, lng: 118.743399, lat: 32.032059,
+    address: "云锦路万达东坊1栋1530室", desc: "日式烧肉专门店，肉质极佳，和牛牛排必点。服务周到，适合纪念日，烤网换得勤，吃的是食材本味。",
+    tags: ["和牛","日式","纪念日"], recommend: ["必吃榜","好评优先"],
+    cover: "https://images.unsplash.com/photo-1544025162-d76694265947?w=600&q=80"
+  },
+  {
+    id: 13, name: "九田家黑牛烤肉料理", emoji: "🥩",
+    category: "烤肉", subCategory: "日式烧肉", budget: "100-200",
+    avgPrice: 95, rating: 4.2,
+    district: "栖霞区", distance: 33.1, lng: 118.990625, lat: 32.122325,
+    address: "西岗街道仙林大道181号万达茂室内步行街三楼3055B-3056", desc: "主打黑牛烧肉，人均130左右性价比高。酱油腌肉是特色，配米饭一绝，适合不想太破费但又想吃点好的。",
+    tags: ["黑牛","性价比","米饭配肉"], recommend: ["人气高"],
+    cover: "https://images.unsplash.com/photo-1544025162-d76694265947?w=600&q=80"
+  },
+  {
+    id: 14, name: "小核桃烤肉馆", emoji: "🌰",
+    category: "烤肉", subCategory: "东北烤肉", budget: "100-200",
+    avgPrice: 150, rating: 4.6,
+    district: "秦淮区", distance: 14, lng: 118.795001, lat: 32.039833,
+    address: "太平南路1号新世纪广场4F", desc: "小核桃炭火烤肉，学生党聚集地。肉实在、价格便宜、味道好，烤酸菜五花肉是灵魂，适合仙林大学生情侣。",
+    tags: ["平价","东北烤肉","学生党"], recommend: ["人气高"],
+    cover: "https://images.unsplash.com/photo-1544025162-d76694265947?w=600&q=80"
+  },
+  {
+    id: 15, name: "酒拾烤肉", emoji: "🍖",
+    category: "烤肉", subCategory: "韩式烤肉", budget: "100-200",
+    avgPrice: 65, rating: 3.8,
+    district: "江宁区", distance: 20.8, lng: 118.612183, lat: 31.870284,
+    address: "宁桥北路38号", desc: "平价韩式烤肉，招牌秘制五花肉提前腌过，烤完不用蘸料也好吃。芝士玉米、石锅拌饭配着吃。",
+    tags: ["秘制五花","平价","芝士玉米"], recommend: ["人气高"],
+    cover: "https://images.unsplash.com/photo-1544025162-d76694265947?w=600&q=80"
+  },
+  {
+    id: 16, name: "新石器烤肉", emoji: "🪨",
+    category: "烤肉", subCategory: "韩式烤肉", budget: "100-200",
+    avgPrice: 94, rating: 4.3,
+    district: "浦口区", distance: 1.4, lng: 118.652675, lat: 32.042975,
+    address: "江北新区砂之船奥特莱斯4楼新石器烤肉", desc: "老牌韩式烤肉，芝士鸡腿肉、吾桑格是招牌，蘸料丰富。商场店等位少，逛街顺路吃很方便。",
+    tags: ["芝士鸡腿","商场店","方便"], recommend: ["人气高"],
+    cover: "https://images.unsplash.com/photo-1544025162-d76694265947?w=600&q=80"
+  },
+  {
+    id: 17, name: "星伦多海鲜自助", emoji: "🦐",
+    category: "烤肉", subCategory: "海鲜自助", budget: "200-300",
+    avgPrice: 93, rating: 4.3,
+    district: "邗江区", distance: 82.4, lng: 119.425847, lat: 32.395046,
+    address: "文昌中路606号华润万象汇L2层L221、L222商铺", desc: "海鲜+烤肉双拼自助，三文鱼、生蚝、牛排无限量。胃口好的情侣能回本，仪式感拉满。",
+    tags: ["自助","海鲜","回本"], recommend: ["好评优先"],
+    cover: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80"
+  },
+  {
+    id: 18, name: "猪大锤炭火烤肉", emoji: "🐷",
+    category: "烤肉", subCategory: "炭火烤肉", budget: "100-200",
+    avgPrice: 71, rating: 4.6,
+    district: "秦淮区", distance: 12.9, lng: 118.783678, lat: 32.03886,
+    address: "中山南路122号大洋百货B1楼", desc: "炭火烤肉小馆，猪五花厚切烤到焦香，配蒜片和青椒绝了。老板热情，氛围像朋友家聚餐。",
+    tags: ["炭火","厚五花","氛围好"], recommend: ["人气高"],
+    cover: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80"
+  },
+  // ── 日料 ─────────────────────────────────────────
+  {
+    id: 19, name: "丸龟制面（新街口）", emoji: "🍜",
+    category: "日料", subCategory: "日式拉面", budget: "100以下",
+    avgPrice: 64, rating: 3.5,
+    district: "东区", distance: 1171.1, lng: 114.222243, lat: 22.283625,
+    address: "太古城道18号", desc: "日式自助乌冬面，自己选配料，炸鸡也超好吃。平价日料，干净快速，适合想简单吃一顿的时候。",
+    tags: ["乌冬面","平价","快食"], recommend: ["人气高"],
+    cover: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=600&q=80"
+  },
+  {
+    id: 20, name: "鮨治屋·日式居酒屋", emoji: "🍶",
+    category: "日料", subCategory: "居酒屋", budget: "100-200",
+    avgPrice: 124, rating: 2.7,
+    district: "鼓楼区", distance: 12, lng: 118.775016, lat: 32.051882,
+    address: "上海路81号1室(五台山地铁站3A口步行210米)", desc: "老门东里的日式小酒馆，暖黄灯光，烧鸟配清酒。氛围感强，适合晚上逛完老门东顺路小酌一杯。",
+    tags: ["居酒屋","烧鸟","老门东"], recommend: ["好评优先","约会圣地"],
+    cover: "https://images.unsplash.com/photo-1579027989536-b7b1f875659b?w=600&q=80"
+  },
+  {
+    id: 21, name: "将太无二（河西）", emoji: "🍣",
+    category: "日料", subCategory: "刺身寿司", budget: "200-300",
+    avgPrice: 124, rating: 4.5,
+    district: "河西区", distance: 795.4, lng: 117.216567, lat: 39.113679,
+    address: "南京路39号天津国贸购物中心02层15号", desc: "创意寿司店，摆盘精致，三文鱼、北极贝品质稳定。适合喜欢精致日料但不想太正式的情侣。",
+    tags: ["寿司","创意","精致"], recommend: ["好评优先"],
+    cover: "https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?w=600&q=80"
+  },
+  {
+    id: 22, name: "争鲜回转寿司", emoji: "🍣",
+    category: "日料", subCategory: "刺身寿司", budget: "100以下",
+    avgPrice: 63, rating: 4.5,
+    district: "鼓楼区", distance: 12.8, lng: 118.783678, lat: 32.05077,
+    address: "中山路221号龙世中心一层104室", desc: "传送带自助寿司，30元一碟起。便宜简单，想吃多少拿多少，适合馋日料又不想花钱的时候。",
+    tags: ["平价","回转寿司","随便拿"], recommend: ["人气高"],
+    cover: "https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?w=600&q=80"
+  },
+  {
+    id: 23, name: "藏寿司 KURA", emoji: "🍣",
+    category: "日料", subCategory: "回转寿司", budget: "100以下",
+    avgPrice: 195, rating: 4.5,
+    district: "秦淮区", distance: 13, lng: 118.780354, lat: 32.021666,
+    address: "中山南路666号L3层L304b", desc: "日本连锁回转寿司，每盘12元良心价，有自动送餐轨道和扭蛋小玩具，约会好玩又便宜。",
+    tags: ["平价","扭蛋","好玩"], recommend: ["人气高"],
+    cover: "https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?w=600&q=80"
+  },
+  {
+    id: 24, name: "鮨一太郎", emoji: "🍤",
+    category: "日料", subCategory: "Omakase", budget: "300以上随便吃",
+    avgPrice: 1176, rating: 4.2,
+    district: "建邺区", distance: 9.3, lng: 118.724626, lat: 32.002798,
+    address: "奥体大街139号华泰万丽酒店1楼", desc: "江浙主厨坐镇的omakase，板前只有8个座位，私密感强。酒肴和寿司都讲究时令，求婚级氛围。",
+    tags: ["Omakase","板前","私密"], recommend: ["黑珍珠","好评优先"],
+    cover: "https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?w=600&q=80"
+  },
+  {
+    id: 25, name: "村上一屋", emoji: "🍱",
+    category: "日料", subCategory: "刺身寿司", budget: "100以下",
+    avgPrice: NaN, rating: NaN,
+    district: "玄武区", distance: 14.4, lng: 118.800502, lat: 32.059732,
+    address: "北京东路51号(鸡鸣寺地铁站4号口步行380米)", desc: "高校周边平价寿司，三文鱼刺身厚切良心，寿司拼盘分量足。学生党的日料食堂。",
+    tags: ["平价","厚切","学生党"], recommend: ["人气高"],
+    cover: "https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?w=600&q=80"
+  },
+  {
+    id: 26, name: "鲜目录寿司", emoji: "🍙",
+    category: "日料", subCategory: "刺身寿司", budget: "100以下",
+    avgPrice: 24, rating: 3.2,
+    district: "浦口区", distance: 12.3, lng: 118.742714, lat: 32.131169,
+    address: "滨江大道1号明发滨江新城249-250幢1101室", desc: "外带寿司专门店，饭团和卷物现做，方便带走去公园野餐。两人份拼盘人均60，约会轻食首选。",
+    tags: ["外带","野餐","轻食"], recommend: ["人气高"],
+    cover: "https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?w=600&q=80"
+  },
+  // ── 烧烤 ─────────────────────────────────────────
+  {
+    id: 27, name: "楼顶烧烤·天台撸串", emoji: "🍢",
+    category: "烧烤", subCategory: "网红烧烤摊", budget: "100-200",
+    avgPrice: 74, rating: 4.4,
+    district: "鼓楼区", distance: 12.7, lng: 118.78188, lat: 32.046434,
+    address: "华侨路26号-2", desc: "天台烧烤，星空下撸串，氛围感拉满。烤生蚝、烤茄子是招牌，适合夏天晚上去，微风+烧烤=浪漫。",
+    tags: ["天台","夏天","氛围感"], recommend: ["约会圣地","人气高"],
+    cover: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600&q=80"
+  },
+  {
+    id: 28, name: "阿凡提烧烤", emoji: "🍢",
+    category: "烧烤", subCategory: "新疆烧烤", budget: "100以下",
+    avgPrice: 57, rating: 3.9,
+    district: "玄武区", distance: 13.2, lng: 118.784426, lat: 32.083277,
+    address: "中央路廖家巷1号(新模范马路地铁站2号口步行340米)", desc: "新疆大叔开的烧烤摊，红柳烤肉正宗，馕坑肉外焦里嫩。便宜实在，烟火气十足，吃的是市井味道。",
+    tags: ["新疆","红柳烤肉","烟火气"], recommend: ["好评优先"],
+    cover: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600&q=80"
+  },
+  {
+    id: 29, name: "老金烧烤（迈皋桥）", emoji: "🍢",
+    category: "烧烤", subCategory: "东北烧烤", budget: "100以下",
+    avgPrice: 59, rating: 3.6,
+    district: "栖霞区", distance: 20.8, lng: 118.854475, lat: 32.121225,
+    address: "瑞霞路与和悦街交叉口北40米", desc: "老社区里的烧烤神店，本地人从小吃到大。烤鸡翅外焦里嫩，配上南京本地啤酒，就是最地道的夜宵。",
+    tags: ["老店","本地人","鸡翅"], recommend: ["人气高"],
+    cover: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600&q=80"
+  },
+  {
+    id: 30, name: "探烤·齐齐哈尔烤肉", emoji: "🥩",
+    category: "烧烤", subCategory: "东北烧烤", budget: "100-200",
+    avgPrice: 99, rating: 4.5,
+    district: "鼓楼区", distance: 9.7, lng: 118.751242, lat: 32.059197,
+    address: "石头城路81号", desc: "黑龙江风味拌肉烧烤，牛肉提前用洋葱孜然腌过，烤完嫩香入味。量大实惠，适合肉食情侣。",
+    tags: ["拌肉","东北","量大"], recommend: ["好评优先"],
+    cover: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600&q=80"
+  },
+  {
+    id: 31, name: "木屋烧烤", emoji: "🍖",
+    category: "烧烤", subCategory: "烧烤", budget: "100-200",
+    avgPrice: 82, rating: 4.6,
+    district: "秦淮区", distance: 13, lng: 118.783887, lat: 32.034515,
+    address: "中山南路224号桐林荟大厦105-106室", desc: "全国连锁烧烤，生蚝扇贝现烤，猪蹄是招牌。深夜还营业，约会晚了也能吃上热乎的。",
+    tags: ["生蚝","深夜营业","猪蹄"], recommend: ["人气高"],
+    cover: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600&q=80"
+  },
+  {
+    id: 32, name: "望京小腰", emoji: "🍢",
+    category: "烧烤", subCategory: "北京烧烤", budget: "100以下",
+    avgPrice: 43, rating: 3.7,
+    district: "鸠江区", distance: 77.3, lng: 118.380312, lat: 31.398481,
+    address: "水阳江路蓝领公寓7号门面", desc: "北京风味烧烤，招牌羊小腰处理得没膻味，烤韭菜、烤馒头片是老北京吃法。人均70管饱。",
+    tags: ["羊小腰","北京风","平价"], recommend: ["人气高"],
+    cover: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600&q=80"
+  },
+  {
+    id: 33, name: "管氏翅吧", emoji: "🍗",
+    category: "烧烤", subCategory: "烧烤", budget: "100以下",
+    avgPrice: 80, rating: 4.5,
+    district: "朝阳区", distance: 895.4, lng: 116.47075, lat: 39.91336,
+    address: "光华路8号首欣大厦一层管氏翅吧", desc: "烤翅专门店，秘制烤翅外焦里嫩带点甜辣，配烤馒头片绝了。看球撸串的标配，氛围热闹。",
+    tags: ["烤翅","甜辣","看球"], recommend: ["人气高"],
+    cover: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600&q=80"
+  },
+  // ── 中餐·地方菜 ─────────────────────────────────────────
+  {
+    id: 34, name: "南京大排档", emoji: "🦆",
+    category: "中餐·地方菜", subCategory: "本帮菜", budget: "100以下",
+    avgPrice: 68, rating: 4.7,
+    district: "玄武区", distance: 14, lng: 118.795997, lat: 32.04505,
+    address: "长江路288号南京1912街区(东北角)", desc: "南京本地菜的代表，盐水鸭、美龄粥、桂花糕……老南京味道，价格亲民，第一次来南京必打卡。",
+    tags: ["南京菜","盐水鸭","必打卡"], recommend: ["必吃榜","好评优先"],
+    cover: "https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=80"
+  },
+  {
+    id: 35, name: "眉州东坡酒楼", emoji: "🌶️",
+    category: "中餐·地方菜", subCategory: "川菜", budget: "100-200",
+    avgPrice: 84, rating: 4.5,
+    district: "秦淮区", distance: 12.7, lng: 118.781408, lat: 32.040396,
+    address: "王府大街29号金陵中环JLC西区六层A-L6-11b、A-L6-12a号", desc: "正宗川菜，眉山style。宫保鸡丁、水煮鱼、口水鸡……辣而不燥，适合能吃辣又想吃正餐的情侣。",
+    tags: ["川菜","水煮鱼","正宗"], recommend: ["好评优先"],
+    cover: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=600&q=80"
+  },
+  {
+    id: 36, name: "苏帮菜·江南里", emoji: "🍃",
+    category: "中餐·地方菜", subCategory: "江浙菜", budget: "200-300",
+    avgPrice: 102, rating: 4.6,
+    district: "秦淮区", distance: 13.1, lng: 118.781763, lat: 32.024375,
+    address: "中山南路37号(三山街地铁站2号口步行110米)", desc: "精致苏帮菜，松鼠鳜鱼、清炒虾仁、糖醋小排……环境雅致，适合想安静吃顿饭的情侣，有包间。",
+    tags: ["苏帮菜","松鼠鳜鱼","有包间"], recommend: ["必吃榜","环境榜TOP"],
+    cover: "https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=80"
+  },
+  {
+    id: 37, name: "小厨娘淮扬菜", emoji: "🦐",
+    category: "中餐·地方菜", subCategory: "江浙菜", budget: "100-200",
+    avgPrice: 150, rating: 4.7,
+    district: "玄武区", distance: 12.9, lng: 118.784542, lat: 32.048084,
+    address: "中山路132号艾尚天地B座3层(地铁1号线珠江路4号出口)", desc: "淮扬菜代表，大煮干丝、红烧肉、蟹粉狮子头……口味清淡细腻，老人家也爱吃，适合家庭聚餐。",
+    tags: ["淮扬菜","清淡","家庭风"], recommend: ["好评优先"],
+    cover: "https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=80"
+  },
+  {
+    id: 38, name: "粤菜·翠园", emoji: "🥟",
+    category: "中餐·地方菜", subCategory: "粤菜", budget: "200-300",
+    avgPrice: 208, rating: 4.6,
+    district: "建邺区", distance: 10, lng: 118.717012, lat: 31.986308,
+    address: "庐山路266号国泰金融中心3栋C座3层", desc: "正宗粤菜，虾饺皇、叉烧、烧鹅……品质稳定，环境好，适合正式一点的约会。",
+    tags: ["粤菜","虾饺","品质稳定"], recommend: ["好评优先"],
+    cover: "https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=80"
+  },
+  {
+    id: 39, name: "炊烟时代·湘菜馆", emoji: "🌶️",
+    category: "中餐·地方菜", subCategory: "湘菜", budget: "100-200",
+    avgPrice: 49, rating: 4.5,
+    district: "开福区", distance: 691.6, lng: 112.987387, lat: 28.215254,
+    address: "芙蓉中路一段303号CFC富兴时代L5", desc: "湘菜小馆，小炒肉、剁椒鱼头、臭豆腐……重口味下饭神器，微辣中辣可选，适合无辣不欢的情侣。",
+    tags: ["湘菜","小炒肉","下饭"], recommend: ["人气高"],
+    cover: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=600&q=80"
+  },
+  {
+    id: 40, name: "狮子桥·回味鸭血粉丝汤", emoji: "🦆",
+    category: "中餐·地方菜", subCategory: "本帮菜", budget: "100以下",
+    avgPrice: 21, rating: 4.5,
+    district: "鼓楼区", distance: 12.3, lng: 118.777261, lat: 32.067458,
+    address: "青春广场地铁站1号口步行480米", desc: "南京经典小吃，鸭血粉丝汤+小笼包。便宜好吃，是南京最有代表性的本地味道，百吃不厌。",
+    tags: ["小吃","鸭血粉丝","便宜"], recommend: ["必吃榜","人气高"],
+    cover: "https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=80"
+  },
+  {
+    id: 41, name: "胡仁雅苑·本帮私房", emoji: "🦆",
+    category: "中餐·地方菜", subCategory: "本帮菜", budget: "100-200",
+    avgPrice: 139, rating: 4.5,
+    district: "江宁区", distance: 19.9, lng: 118.811366, lat: 31.94229,
+    address: "湖滨路15号世界村E-12幢", desc: "藏在老门东里的本帮菜私房馆，环境古色古香，糖藕、清炒虾仁、南京素烧鹅……地道的江南风味。",
+    tags: ["私房","本帮菜","老门东"], recommend: ["必吃榜","约会圣地"],
+    cover: "https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=80"
+  },
+  {
+    id: 42, name: "绿柳居", emoji: "🥬",
+    category: "中餐·地方菜", subCategory: "素菜", budget: "100以下",
+    avgPrice: 79, rating: 4.6,
+    district: "秦淮区", distance: 13.8, lng: 118.79234, lat: 32.03443,
+    address: "太平南路248号1-6层", desc: "百年素菜老字号，素烧鹅、罗汉观斋做得以假乱真。想吃得清淡又想尝南京味道，来这就对。",
+    tags: ["素菜","老字号","清淡"], recommend: ["好评优先"],
+    cover: "https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=80"
+  },
+  {
+    id: 43, name: "鸡鸣汤包", emoji: "🥟",
+    category: "中餐·地方菜", subCategory: "本帮菜", budget: "100以下",
+    avgPrice: 37, rating: 4.7,
+    district: "鼓楼区", distance: 12.2, lng: 118.776268, lat: 32.068836,
+    address: "湖南路185号(青春广场地铁站1号口步行270米)", desc: "鸡鸣寺旁的汤包老店，皮薄汁多，蟹黄汤包季节限定。逛完寺庙来一笼，南京人的早晨味道。",
+    tags: ["汤包","老字号","蟹黄"], recommend: ["必吃榜","人气高"],
+    cover: "https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=80"
+  },
+  {
+    id: 44, name: "李记清真馆", emoji: "🐑",
+    category: "中餐·地方菜", subCategory: "本帮菜", budget: "100以下",
+    avgPrice: 26, rating: 4.8,
+    district: "秦淮区", distance: 12.7, lng: 118.779783, lat: 32.029251,
+    address: "朝天宫街道评事街打钉巷1号", desc: "老城南清真馆，牛肉锅贴现煎现卖，皮脆汁多。牛肉馄饨、盐水鸭也地道，本地人排长队。",
+    tags: ["锅贴","清真","本地人"], recommend: ["好评优先"],
+    cover: "https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=80"
+  },
+  {
+    id: 45, name: "杭州外婆家", emoji: "🐟",
+    category: "中餐·地方菜", subCategory: "江浙菜", budget: "100-200",
+    avgPrice: 60, rating: 4.6,
+    district: "拱墅区", distance: 245.7, lng: 120.170485, lat: 30.270302,
+    address: "体育场路218号杭州日报大楼裙楼(中河北路口)", desc: "性价比江浙菜，茶香鸡、西湖醋鱼、麻婆豆腐都是经典。人均不到100吃得很满足，约会不心疼。",
+    tags: ["性价比","茶香鸡","江浙"], recommend: ["人气高"],
+    cover: "https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=80"
+  },
+  {
+    id: 46, name: "南京精菜馆", emoji: "🍲",
+    category: "中餐·地方菜", subCategory: "本帮菜", budget: "100-200",
+    avgPrice: 157, rating: 4.5,
+    district: "鼓楼区", distance: 12.4, lng: 118.779419, lat: 32.05877,
+    address: "北京西路7号晶丽酒店2层", desc: "改良南京菜，盐水鸭、狮子头、响油鳝糊做得精致。环境安静有格调，想吃点讲究的本帮菜来这。",
+    tags: ["本帮菜","精致","安静"], recommend: ["好评优先"],
+    cover: "https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=80"
+  },
+  // ── 西餐 ─────────────────────────────────────────
+  {
+    id: 47, name: "Salvia 萨尔维亚意大利餐厅", emoji: "🍝",
+    category: "西餐", subCategory: "意餐", budget: "200-300",
+    avgPrice: 55, rating: 4.6,
+    district: "玄武区", distance: 13.2, lng: 118.788457, lat: 32.059404,
+    address: "北京东路1号环亚凯瑟琳广场B1层", desc: "正宗意大利餐厅，手工意面、黑松露披萨、提拉米苏……适合纪念日，有情调但不过于正式。",
+    tags: ["意餐","手工意面","纪念日"], recommend: ["必吃榜","约会圣地"],
+    cover: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80"
+  },
+  {
+    id: 48, name: "Green Kitchen 绿厨房沙拉吧", emoji: "🥗",
+    category: "西餐", subCategory: "西式简餐", budget: "100以下",
+    avgPrice: NaN, rating: 2.5,
+    district: "秦淮区", distance: 13.7, lng: 118.792045, lat: 32.038546,
+    address: "延龄巷60-8号(大行宫地铁站出入口步行450米)", desc: "轻食沙拉餐厅，健康新鲜，适合想吃得清淡一点的情侣。牛油果鸡肉沙拉是招牌，颜值也高。",
+    tags: ["轻食","沙拉","健康"], recommend: ["人气高"],
+    cover: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&q=80"
+  },
+  {
+    id: 49, name: "巴黎红 Paris Rouge", emoji: "🥐",
+    category: "西餐", subCategory: "法餐", budget: "300以上随便吃",
+    avgPrice: NaN, rating: 4,
+    district: "玄武区", distance: 13, lng: 118.784855, lat: 32.044185,
+    address: "中山路18号德基广场二期1F层", desc: "正宗法餐，鹅肝、牛排、红酒……氛围满分，是南京最适合求婚/纪念日的餐厅之一，提前订窗边位。",
+    tags: ["法餐","红酒","求婚级"], recommend: ["黑珍珠","环境榜TOP"],
+    cover: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80"
+  },
+  {
+    id: 50, name: "Sunday brunch · 早午餐", emoji: "🍳",
+    category: "西餐", subCategory: "Brunch", budget: "100-200",
+    avgPrice: 74, rating: 4.5,
+    district: "秦淮区", distance: 13.9, lng: 118.790068, lat: 32.020281,
+    address: "贡院街119号2层(夫子庙地铁站6号口步行390米)", desc: "周末Brunch专门店，班尼迪克蛋、舒芙蕾松饼、华夫饼……慵懒周末的正确打开方式，拍照很好看。",
+    tags: ["Brunch","周末","舒芙蕾"], recommend: ["约会圣地","人气高"],
+    cover: "https://images.unsplash.com/photo-1493770348161-369560ae357d?w=600&q=80"
+  },
+  {
+    id: 51, name: "La Maison 拉美逊西餐", emoji: "🥩",
+    category: "西餐", subCategory: "西式简餐", budget: "100-200",
+    avgPrice: 41, rating: 4.4,
+    district: "秦淮区", distance: 13.8, lng: 118.793491, lat: 32.038544,
+    address: "太平南路102-104号Nows新座里面广场2楼04商铺", desc: "西式简餐，牛排汉堡、奶油培根意面……出品稳定，适合不想吃得太正式，但又想吃西餐的时候。",
+    tags: ["西餐","牛排","稳定"], recommend: ["人气高"],
+    cover: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80"
+  },
+  {
+    id: 52, name: "必胜客", emoji: "🍕",
+    category: "西餐", subCategory: "披萨", budget: "100-200",
+    avgPrice: 51, rating: 4.7,
+    district: "秦淮区", distance: 12.8, lng: 118.783282, lat: 32.040846,
+    address: "汉中路1号负一层D6商铺", desc: "经典披萨连锁，芝心披萨、超级至尊是标配。环境轻松适合聊天，约会入门级西餐，不踩雷。",
+    tags: ["披萨","轻松","不踩雷"], recommend: ["人气高"],
+    cover: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80"
+  },
+  {
+    id: 53, name: "蓝蛙 Blue Frog", emoji: "🍔",
+    category: "西餐", subCategory: "西式简餐", budget: "100-200",
+    avgPrice: 124, rating: 4.6,
+    district: "鼓楼区", distance: 12.9, lng: 118.78352, lat: 32.073515,
+    address: "中央路201号金茂览秀城1层L111店铺", desc: "美式餐吧，汉堡、牛排、鸡翅分量足，鸡尾酒也好喝。看球约会两不误，氛围热闹轻松。",
+    tags: ["美式","汉堡","鸡尾酒"], recommend: ["人气高"],
+    cover: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80"
+  },
+  // ── 其他 ─────────────────────────────────────────
+  {
+    id: 54, name: "桂满陇·西湖船宴", emoji: "🍃",
+    category: "其他", subCategory: "融合菜", budget: "100-200",
+    avgPrice: 84, rating: 4.5,
+    district: "秦淮区", distance: 12.7, lng: 118.781219, lat: 32.040689,
+    address: "王府大街29号金陵中环广场西区L6层A-L6-01&08", desc: "江南融合菜，装修是江南古镇风格，乌篷船餐桌。招牌菜品颜值高，适合拍照，口味也不错。",
+    tags: ["融合菜","拍照","江南风"], recommend: ["必吃榜","人气高"],
+    cover: "https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=80"
+  },
+  {
+    id: 55, name: "南京大排档（私房菜）", emoji: "🍲",
+    category: "其他", subCategory: "私房菜", budget: "200-300",
+    avgPrice: 83, rating: 4.6,
+    district: "秦淮区", distance: 17.8, lng: 118.833641, lat: 32.024314,
+    address: "月牙湖紫金路天地花园2幢105室", desc: "预约制私房菜，没有菜单，主厨当天配菜。环境私密，菜品精致，适合纪念日或者想给对方惊喜的时候。",
+    tags: ["私房菜","预约制","惊喜"], recommend: ["必吃榜","约会圣地"],
+    cover: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80"
+  },
+  {
+    id: 56, name: "瓦的越南粉", emoji: "🍜",
+    category: "其他", subCategory: "融合菜", budget: "100以下",
+    avgPrice: NaN, rating: 1.4,
+    district: "鼓楼区", distance: 14.5, lng: 118.793766, lat: 32.096651,
+    address: "能悦坊东门东北230米", desc: "越南粉专门店，汤鲜粉滑，生熟牛肉粉是招牌。东南亚风味，清爽不腻，适合换换口味的时候。",
+    tags: ["越南粉","东南亚","清爽"], recommend: ["人气高"],
+    cover: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=600&q=80"
+  },
+  {
+    id: 57, name: "泰象·泰国菜", emoji: "🥘",
+    category: "其他", subCategory: "融合菜", budget: "100-200",
+    avgPrice: 64, rating: 4.2,
+    district: "栖霞区", distance: 25.7, lng: 118.917149, lat: 32.092463,
+    address: "学衡路5号附近九霄梦天地B1层", desc: "泰国菜，冬阴功汤、菠萝饭、青木瓜沙拉……酸辣开胃，适合想吃点重口味异域菜的时候。",
+    tags: ["泰国菜","冬阴功","酸辣"], recommend: ["好评优先"],
+    cover: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=600&q=80"
+  },
+  {
+    id: 58, name: "鸡鸣寺素面", emoji: "🍜",
+    category: "其他", subCategory: "素斋", budget: "100以下",
+    avgPrice: NaN, rating: 4.5,
+    district: "玄武区", distance: 13.9, lng: 118.79527, lat: 32.061384,
+    address: "古鸡鸣寺", desc: "鸡鸣寺里的素面，鲜菇汤底配香菇笋片，一碗下肚很治愈。逛寺庙顺路吃，约会也能很清净。",
+    tags: ["素面","寺庙","治愈"], recommend: ["必吃榜","人气高"],
+    cover: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=600&q=80"
+  },
+  {
+    id: 59, name: "芳婆糕团店", emoji: "🍡",
+    category: "其他", subCategory: "小吃", budget: "100以下",
+    avgPrice: 13, rating: 4.7,
+    district: "秦淮区", distance: 12.5, lng: 118.778952, lat: 32.0382,
+    address: "王府大街50号(新街口地铁站21号口步行490米)", desc: "南京人从小吃到大的糕团店，酒酿元宵、乌饭团、赤豆元宵是经典。早起排队也要吃，便宜又地道。",
+    tags: ["糕团","老字号","便宜"], recommend: ["必吃榜","人气高"],
+    cover: "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=600&q=80"
+  },
+  {
+    id: 60, name: "小杨生煎", emoji: "🥟",
+    category: "其他", subCategory: "小吃", budget: "100以下",
+    avgPrice: 33, rating: 4.5,
+    district: "玄武区", distance: 13.5, lng: 118.784785, lat: 32.091369,
+    address: "龙蟠路1号南京商厦1层(小市地铁站1号口步行450米)", desc: "上海生煎包，底部焦脆、馅大汁多，一口爆汁。配牛肉粉丝汤，逛街垫肚子首选，快捷不占地。",
+    tags: ["生煎","爆汁","快捷"], recommend: ["人气高"],
+    cover: "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=600&q=80"
+  },
+  {
+    id: 61, name: "拾叁茶", emoji: "🧋",
+    category: "其他", subCategory: "茶饮", budget: "100以下",
+    avgPrice: 17, rating: 4.6,
+    district: "秦淮区", distance: 12.9, lng: 118.783542, lat: 32.037317,
+    address: "中山南路146号-3", desc: "南京本土茶饮，桂花酒酿、栀香绿是特色，用的是本地产桂花。逛老门东人手一杯，约会的甜。",
+    tags: ["茶饮","桂花","本土"], recommend: ["人气高"],
+    cover: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=600&q=80"
+  },
+  {
+    id: 62, name: "南京博物院·民国餐厅", emoji: "🍴",
+    category: "其他", subCategory: "私房菜", budget: "100-200",
+    avgPrice: 76, rating: 4.5,
+    district: "秦淮区", distance: 16.5, lng: 118.822091, lat: 32.03872,
+    address: "中山东路532-1号(明故宫地铁站1号口步行270米)", desc: "博物院里的民国风餐厅，菜品走精致本帮路线，吃完逛馆子顺路。约会+文化两不误。",
+    tags: ["民国风","博物院","文化"], recommend: ["好评优先"],
+    cover: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80"
+  },
+  {
+    id: 63, name: "江宁·黄龙岘茶乡土菜", emoji: "🍃",
+    category: "其他", subCategory: "农家菜", budget: "100-200",
+    avgPrice: 64, rating: 4.2,
+    district: "江宁区", distance: 30.8, lng: 118.688449, lat: 31.780141,
+    address: "黄龙砚718", desc: "茶园边的农家土菜，土鸡汤、笋干烧肉、炒野菜都是现采。周末开车去郊游约会，空气好又出片。",
+    tags: ["农家菜","郊游","茶园"], recommend: ["人气高"],
+    cover: "https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=80"
+  },,
+
+  // ── 新增店铺（来自美团截图 OCR，2025年7月） ──────────────
+  {
+    id: 64, name: "居久的屋·日料", emoji: "🍣",
+    category: "日料", subCategory: "日料", budget: "100-200",
+    avgPrice: 154, rating: 4.8,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "居久的屋·日料，浦口区，人均154元，评分4.8。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 65, name: "乐藏烧鸟·烧肉酒场", emoji: "🍢",
+    category: "日料", subCategory: "日料", budget: "100-200",
+    avgPrice: 105, rating: 4.6,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "乐藏烧鸟·烧肉酒场，浦口区，人均105元，评分4.6。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 66, name: "澜屋·新中式日料", emoji: "🍱",
+    category: "日料", subCategory: "日料", budget: "100-200",
+    avgPrice: 120, rating: 4.5,
+    district: "江北新区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "澜屋·新中式日料，江北新区，人均120元，评分4.5。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 67, name: "樱の千渡日式料理·铁板烧", emoji: "🥩",
+    category: "日料", subCategory: "日料", budget: "100以下",
+    avgPrice: 83, rating: 4.6,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "樱の千渡日式料理·铁板烧，浦口区，人均83元，评分4.6。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 68, name: "九本屋日式料理", emoji: "🍣",
+    category: "日料", subCategory: "日料", budget: "100以下",
+    avgPrice: 96, rating: 4.7,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "九本屋日式料理，浦口区，人均96元，评分4.7。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 69, name: "虹之焰铁板烧", emoji: "🥇",
+    category: "日料", subCategory: "日料", budget: "100以下",
+    avgPrice: 73, rating: 4.6,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "虹之焰铁板烧，浦口区，人均73元，评分4.6。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 70, name: "滨寿司", emoji: "🍣",
+    category: "日料", subCategory: "日料", budget: "100以下",
+    avgPrice: 85, rating: 4.1,
+    district: "雨花台区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "滨寿司，雨花台区，人均85元，评分4.1。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 71, name: "文三·温寿司", emoji: "🍣",
+    category: "日料", subCategory: "日料", budget: "100-200",
+    avgPrice: 118, rating: 4.6,
+    district: "建邺区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "文三·温寿司，建邺区，人均118元，评分4.6。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 72, name: "酒井米舍", emoji: "🍣",
+    category: "日料", subCategory: "日料", budget: "100-200",
+    avgPrice: 117, rating: 4.2,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "酒井米舍，浦口区，人均117元，评分4.2。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 73, name: "云樽·板前十胜·烧鸟割烹", emoji: "🍢",
+    category: "日料", subCategory: "日料", budget: "100-200",
+    avgPrice: 194, rating: 4.9,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "云樽·板前十胜·烧鸟割烹，浦口区，人均194元，评分4.9。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 74, name: "庐觅 Lumie·Kitchen&Bar", emoji: "🥗",
+    category: "西餐", subCategory: "西餐", budget: "100以下",
+    avgPrice: 80, rating: 4.7,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "庐觅 Lumie·Kitchen&Bar，浦口区，人均80元，评分4.7。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 75, name: "COMMUNE 幻师", emoji: "🍔",
+    category: "西餐", subCategory: "西餐", budget: "100以下",
+    avgPrice: 87, rating: 4.4,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "COMMUNE 幻师，浦口区，人均87元，评分4.4。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 76, name: "Bco 豆库", emoji: "🥗",
+    category: "西餐", subCategory: "西餐", budget: "100-200",
+    avgPrice: 113, rating: 4.4,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "Bco 豆库，浦口区，人均113元，评分4.4。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 77, name: "依依家牛排工坊", emoji: "🥩",
+    category: "西餐", subCategory: "西餐", budget: "200-300",
+    avgPrice: 231, rating: 4.7,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "依依家牛排工坊，浦口区，人均231元，评分4.7。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 78, name: "青橘融合西餐厅", emoji: "🍽️",
+    category: "西餐", subCategory: "西餐", budget: "100以下",
+    avgPrice: 86, rating: 4.6,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "青橘融合西餐厅，浦口区，人均86元，评分4.6。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 79, name: "L'Arome 芳芳 Fine Bistro", emoji: "🍷",
+    category: "西餐", subCategory: "西餐", budget: "200-300",
+    avgPrice: 279, rating: 4.4,
+    district: "建邺区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "L'Arome 芳芳 Fine Bistro，建邺区，人均279元，评分4.4。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 80, name: "NEW ARC 南法花园餐厅", emoji: "🌿",
+    category: "西餐", subCategory: "西餐", budget: "100-200",
+    avgPrice: 106, rating: 4.4,
+    district: "建邺区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "NEW ARC 南法花园餐厅，建邺区，人均106元，评分4.4。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 81, name: "L'Arome in the sky 芳芳", emoji: "🍷",
+    category: "西餐", subCategory: "西餐", budget: "300以上",
+    avgPrice: 591, rating: 4.7,
+    district: "建邺区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "L'Arome in the sky 芳芳，建邺区，人均591元，评分4.7。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 82, name: "西堤牛排", emoji: "🥩",
+    category: "西餐", subCategory: "西餐", budget: "100-200",
+    avgPrice: 100, rating: 4.6,
+    district: "建邺区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "西堤牛排，建邺区，人均100元，评分4.6。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 83, name: "bluefrog 蓝蛙", emoji: "🍔",
+    category: "西餐", subCategory: "西餐", budget: "100-200",
+    avgPrice: 150, rating: 4.4,
+    district: "秦淮区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "bluefrog 蓝蛙，秦淮区，人均150元，评分4.4。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 84, name: "留白 KITCHEN", emoji: "🍽️",
+    category: "西餐", subCategory: "西餐", budget: "100-200",
+    avgPrice: 120, rating: 4.5,
+    district: "建邺区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "留白 KITCHEN，建邺区，人均120元，评分4.5。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 85, name: "落日餐厅 & Coffee", emoji: "🌅",
+    category: "西餐", subCategory: "西餐", budget: "100-200",
+    avgPrice: 130, rating: 4.4,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "落日餐厅 & Coffee，浦口区，人均130元，评分4.4。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 86, name: "C&S COFFEE 泰式料理简餐", emoji: "🍜",
+    category: "东南亚", subCategory: "东南亚", budget: "100以下",
+    avgPrice: 39, rating: 4.7,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "C&S COFFEE 泰式料理简餐，浦口区，人均39元，评分4.7。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 87, name: "热浪岛", emoji: "🥘",
+    category: "东南亚", subCategory: "东南亚", budget: "100以下",
+    avgPrice: 84, rating: 4.9,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "热浪岛，浦口区，人均84元，评分4.9。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 88, name: "Kelip-Kelip 流萤", emoji: "🌴",
+    category: "东南亚", subCategory: "东南亚", budget: "100以下",
+    avgPrice: 94, rating: 4.4,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "Kelip-Kelip 流萤，浦口区，人均94元，评分4.4。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 89, name: "米纸越南小馆", emoji: "🍲",
+    category: "东南亚", subCategory: "东南亚", budget: "100以下",
+    avgPrice: 84, rating: 4.5,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "米纸越南小馆，浦口区，人均84元，评分4.5。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 90, name: "天天Plus·新加坡融合菜", emoji: "🌿",
+    category: "东南亚", subCategory: "东南亚", budget: "100-200",
+    avgPrice: 127, rating: 4.4,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "天天Plus·新加坡融合菜，浦口区，人均127元，评分4.4。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 91, name: "清真·AL-JANNAT 佳纳特", emoji: "🍛",
+    category: "南亚", subCategory: "南亚", budget: "100以下",
+    avgPrice: 82, rating: 4.9,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "清真·AL-JANNAT 佳纳特，浦口区，人均82元，评分4.9。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 92, name: "甘尼仕·印度餐吧", emoji: "🫓",
+    category: "南亚", subCategory: "南亚", budget: "100以下",
+    avgPrice: 85, rating: 4.3,
+    district: "建邺区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "甘尼仕·印度餐吧，建邺区，人均85元，评分4.3。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 93, name: "TANG DEGREE 墨西哥餐吧", emoji: "🌮",
+    category: "西餐", subCategory: "西餐", budget: "100以下",
+    avgPrice: 57, rating: 4.4,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "TANG DEGREE 墨西哥餐吧，浦口区，人均57元，评分4.4。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 94, name: "ANTEP 安泰普土耳其餐厅", emoji: "🥙",
+    category: "西餐", subCategory: "西餐", budget: "100-200",
+    avgPrice: 135, rating: 4.7,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "ANTEP 安泰普土耳其餐厅，浦口区，人均135元，评分4.7。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 95, name: "KCOOKING 概念韩餐", emoji: "🍲",
+    category: "东南亚", subCategory: "东南亚", budget: "100-200",
+    avgPrice: 102, rating: 4.2,
+    district: "江北新区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "KCOOKING 概念韩餐，江北新区，人均102元，评分4.2。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 96, name: "拾伍號烤肉·活鳗", emoji: "🥩",
+    category: "烤肉", subCategory: "烤肉", budget: "100以下",
+    avgPrice: 87, rating: 4.6,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "拾伍號烤肉·活鳗，浦口区，人均87元，评分4.6。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 97, name: "萍姐火锅·公路夜市", emoji: "🍲",
+    category: "火锅", subCategory: "火锅", budget: "100以下",
+    avgPrice: 92, rating: 4.7,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "萍姐火锅·公路夜市，浦口区，人均92元，评分4.7。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 98, name: "佘火火社区老火锅", emoji: "🔥",
+    category: "火锅", subCategory: "火锅", budget: "100以下",
+    avgPrice: 65, rating: 5,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "佘火火社区老火锅，浦口区，人均65元，评分5。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 99, name: "宽城子美蛙·鲜牛肉自助火锅", emoji: "🐄",
+    category: "火锅", subCategory: "火锅", budget: "100以下",
+    avgPrice: 87, rating: 4.5,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "宽城子美蛙·鲜牛肉自助火锅，浦口区，人均87元，评分4.5。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 100, name: "八合里潮汕鲜牛肉火锅", emoji: "🥩",
+    category: "火锅", subCategory: "火锅", budget: "100以下",
+    avgPrice: 93, rating: 4.7,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "八合里潮汕鲜牛肉火锅，浦口区，人均93元，评分4.7。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 101, name: "牛汕牛嗨·鲜牛肉火锅", emoji: "🐂",
+    category: "火锅", subCategory: "火锅", budget: "100以下",
+    avgPrice: 75, rating: 4.9,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "牛汕牛嗨·鲜牛肉火锅，浦口区，人均75元，评分4.9。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 102, name: "期哒禾牛寿喜烧", emoji: "🥩",
+    category: "火锅", subCategory: "火锅", budget: "100以下",
+    avgPrice: 81, rating: 4.2,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "期哒禾牛寿喜烧，浦口区，人均81元，评分4.2。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 103, name: "喜牛锅·和牛寿喜烧放题", emoji: "🥩",
+    category: "火锅", subCategory: "火锅", budget: "100-200",
+    avgPrice: 102, rating: 4.6,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "喜牛锅·和牛寿喜烧放题，浦口区，人均102元，评分4.6。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 104, name: "宁川汇泥炉老火锅", emoji: "🔥",
+    category: "火锅", subCategory: "火锅", budget: "100以下",
+    avgPrice: 82, rating: 4.9,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "宁川汇泥炉老火锅，浦口区，人均82元，评分4.9。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 105, name: "牛满闽贵州黄牛肉火锅", emoji: "🐂",
+    category: "火锅", subCategory: "火锅", budget: "100以下",
+    avgPrice: 94, rating: 4.5,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "牛满闽贵州黄牛肉火锅，浦口区，人均94元，评分4.5。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 106, name: "無燚鲜货火锅自助", emoji: "🍲",
+    category: "火锅", subCategory: "火锅", budget: "100以下",
+    avgPrice: 84, rating: 4.4,
+    district: "雨花台区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "無燚鲜货火锅自助，雨花台区，人均84元，评分4.4。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 107, name: "阆阆火锅·重庆山野火锅", emoji: "🌶️",
+    category: "火锅", subCategory: "火锅", budget: "100以下",
+    avgPrice: 82, rating: 4.8,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "阆阆火锅·重庆山野火锅，浦口区，人均82元，评分4.8。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 108, name: "滇界·云南野菌菌火锅", emoji: "🍄",
+    category: "火锅", subCategory: "火锅", budget: "100以下",
+    avgPrice: 95, rating: 4.7,
+    district: "雨花台区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "滇界·云南野菌菌火锅，雨花台区，人均95元，评分4.7。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 109, name: "龍歌自助小火锅", emoji: "🍲",
+    category: "火锅", subCategory: "火锅", budget: "100以下",
+    avgPrice: 57, rating: 4.9,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "龍歌自助小火锅，浦口区，人均57元，评分4.9。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 110, name: "毛肚张重庆火锅", emoji: "🌶️",
+    category: "火锅", subCategory: "火锅", budget: "100以下",
+    avgPrice: 89, rating: 4.4,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "毛肚张重庆火锅，浦口区，人均89元，评分4.4。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 111, name: "和牛家·牛肉火锅", emoji: "🐂",
+    category: "火锅", subCategory: "火锅", budget: "100以下",
+    avgPrice: 84, rating: 4.9,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "和牛家·牛肉火锅，浦口区，人均84元，评分4.9。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 112, name: "黔夺夺贵州酸汤火锅", emoji: "🍅",
+    category: "火锅", subCategory: "火锅", budget: "100以下",
+    avgPrice: 88, rating: 4.7,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "黔夺夺贵州酸汤火锅，浦口区，人均88元，评分4.7。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 113, name: "谢丽君地摊火锅", emoji: "🔥",
+    category: "火锅", subCategory: "火锅", budget: "100以下",
+    avgPrice: 67, rating: 4.7,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "谢丽君地摊火锅，浦口区，人均67元，评分4.7。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 114, name: "王和李·海鲜火锅大排档", emoji: "🦐",
+    category: "火锅", subCategory: "火锅", budget: "100以下",
+    avgPrice: 85, rating: 4.8,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "王和李·海鲜火锅大排档，浦口区，人均85元，评分4.8。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 115, name: "牛总店·贵州黄牛肉馆", emoji: "🐂",
+    category: "火锅", subCategory: "火锅", budget: "100以下",
+    avgPrice: 94, rating: 4.1,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "牛总店·贵州黄牛肉馆，浦口区，人均94元，评分4.1。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 116, name: "狄牛牛中式牛肋排火锅", emoji: "🥩",
+    category: "火锅", subCategory: "火锅", budget: "100以下",
+    avgPrice: 60, rating: 5,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "狄牛牛中式牛肋排火锅，浦口区，人均60元，评分5。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 117, name: "巴奴毛肚火锅", emoji: "🌶️",
+    category: "火锅", subCategory: "火锅", budget: "100-200",
+    avgPrice: 140, rating: 4.7,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "巴奴毛肚火锅，浦口区，人均140元，评分4.7。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 118, name: "廣東阿生鱼捞·斑鱼海鲜", emoji: "🐟",
+    category: "火锅", subCategory: "火锅", budget: "100以下",
+    avgPrice: 97, rating: 4.8,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "廣東阿生鱼捞·斑鱼海鲜，浦口区，人均97元，评分4.8。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 119, name: "三出山火锅", emoji: "🌶️",
+    category: "火锅", subCategory: "火锅", budget: "100-200",
+    avgPrice: 128, rating: 4.6,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "三出山火锅，浦口区，人均128元，评分4.6。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 120, name: "郭淑芬鲜切牛肉自助老火锅", emoji: "🐂",
+    category: "火锅", subCategory: "火锅", budget: "100以下",
+    avgPrice: 77, rating: 3.8,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "郭淑芬鲜切牛肉自助老火锅，浦口区，人均77元，评分3.8。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 121, name: "乾门涮肉·老北京新火锅", emoji: "🥩",
+    category: "火锅", subCategory: "火锅", budget: "100以下",
+    avgPrice: 80, rating: 4.3,
+    district: "秦淮区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "乾门涮肉·老北京新火锅，秦淮区，人均80元，评分4.3。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 122, name: "君姐·贵州豆米火锅野菜馆", emoji: "🥘",
+    category: "火锅", subCategory: "火锅", budget: "100以下",
+    avgPrice: 60, rating: 4.7,
+    district: "鼓楼区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "君姐·贵州豆米火锅野菜馆，鼓楼区，人均60元，评分4.7。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 123, name: "滇菌·云野生菌蒸汽石锅鱼", emoji: "🍄",
+    category: "火锅", subCategory: "火锅", budget: "100以下",
+    avgPrice: 92, rating: 4.4,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "滇菌·云野生菌蒸汽石锅鱼，浦口区，人均92元，评分4.4。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 124, name: "惠小涮火锅馆", emoji: "🔥",
+    category: "火锅", subCategory: "火锅", budget: "100以下",
+    avgPrice: 91, rating: 4.5,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "惠小涮火锅馆，浦口区，人均91元，评分4.5。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 125, name: "海底捞火锅", emoji: "🍲",
+    category: "火锅", subCategory: "火锅", budget: "100-200",
+    avgPrice: 112, rating: 4.6,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "海底捞火锅，浦口区，人均112元，评分4.6。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 126, name: "左庭右院鲜牛肉火锅", emoji: "🐂",
+    category: "火锅", subCategory: "火锅", budget: "100-200",
+    avgPrice: 130, rating: 4.4,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "左庭右院鲜牛肉火锅，浦口区，人均130元，评分4.4。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 127, name: "拴宝炭火锅·烧麦", emoji: "🥟",
+    category: "火锅", subCategory: "火锅", budget: "100以下",
+    avgPrice: 60, rating: 4.3,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "拴宝炭火锅·烧麦，浦口区，人均60元，评分4.3。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 128, name: "咖咖火锅", emoji: "🍲",
+    category: "火锅", subCategory: "火锅", budget: "100以下",
+    avgPrice: 80, rating: 4.8,
+    district: "雨花台区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "咖咖火锅，雨花台区，人均80元，评分4.8。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 129, name: "锅立方·开心牛蛙厂", emoji: "🐸",
+    category: "火锅", subCategory: "火锅", budget: "100-200",
+    avgPrice: 102, rating: 4.6,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "锅立方·开心牛蛙厂，浦口区，人均102元，评分4.6。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 130, name: "花云斗云南野生菌火锅", emoji: "🍄",
+    category: "火锅", subCategory: "火锅", budget: "100以下",
+    avgPrice: 61, rating: 4.8,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "花云斗云南野生菌火锅，浦口区，人均61元，评分4.8。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 131, name: "颂想涮吧", emoji: "🍲",
+    category: "火锅", subCategory: "火锅", budget: "100以下",
+    avgPrice: 32, rating: 3.5,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "颂想涮吧，浦口区，人均32元，评分3.5。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 132, name: "山中无老虎·鱼蛙火锅", emoji: "🐸",
+    category: "火锅", subCategory: "火锅", budget: "100以下",
+    avgPrice: 66, rating: 4.6,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "山中无老虎·鱼蛙火锅，浦口区，人均66元，评分4.6。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 133, name: "王和季·海鲜火锅大排档", emoji: "🦐",
+    category: "火锅", subCategory: "火锅", budget: "100以下",
+    avgPrice: 89, rating: 4.8,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "王和季·海鲜火锅大排档，浦口区，人均89元，评分4.8。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 134, name: "小夫妻水发全羊馆", emoji: "🐏",
+    category: "火锅", subCategory: "火锅", budget: "100以下",
+    avgPrice: 68, rating: 4.3,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "小夫妻水发全羊馆，浦口区，人均68元，评分4.3。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 135, name: "刘三姐老火锅·江湖菜", emoji: "🌶️",
+    category: "火锅", subCategory: "火锅", budget: "100以下",
+    avgPrice: 84, rating: 4.5,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "刘三姐老火锅·江湖菜，浦口区，人均84元，评分4.5。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 136, name: "许府牛火锅", emoji: "🐂",
+    category: "火锅", subCategory: "火锅", budget: "100以下",
+    avgPrice: 47, rating: 4.8,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "许府牛火锅，浦口区，人均47元，评分4.8。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 137, name: "重庆烧鸡公", emoji: "🍗",
+    category: "火锅", subCategory: "火锅", budget: "100以下",
+    avgPrice: 58, rating: 4.4,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "重庆烧鸡公，浦口区，人均58元，评分4.4。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 138, name: "陈记药膳鸡", emoji: "🍗",
+    category: "火锅", subCategory: "火锅", budget: "100以下",
+    avgPrice: 38, rating: 4.8,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "陈记药膳鸡，浦口区，人均38元，评分4.8。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 139, name: "水林间·寿喜烧自助", emoji: "🥩",
+    category: "火锅", subCategory: "火锅", budget: "100-200",
+    avgPrice: 179, rating: 4.5,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "水林间·寿喜烧自助，浦口区，人均179元，评分4.5。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 140, name: "盐池滩羊记·盱眙龙虾", emoji: "🦞",
+    category: "小龙虾", subCategory: "小龙虾", budget: "100以下",
+    avgPrice: 66, rating: 4.8,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "盐池滩羊记·盱眙龙虾，浦口区，人均66元，评分4.8。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 141, name: "炭火虾烤·鲜货烧烤·龙虾海鲜", emoji: "🦐",
+    category: "烤串", subCategory: "烤串", budget: "100以下",
+    avgPrice: 61, rating: 4.7,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "炭火虾烤·鲜货烧烤·龙虾海鲜，浦口区，人均61元，评分4.7。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 142, name: "徐州烧烤", emoji: "🍖",
+    category: "烤串", subCategory: "烤串", budget: "100以下",
+    avgPrice: 60, rating: 4,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "徐州烧烤，浦口区，人均60元，评分4。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 143, name: "宝记烧烤·龙虾·啤酒夜宵", emoji: "🍢",
+    category: "烤串", subCategory: "烤串", budget: "100以下",
+    avgPrice: 85, rating: 4.5,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "宝记烧烤·龙虾·啤酒夜宵，浦口区，人均85元，评分4.5。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 144, name: "南山南无限烤肉", emoji: "🥩",
+    category: "烤肉", subCategory: "烤肉", budget: "100以下",
+    avgPrice: 66, rating: 4.7,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "南山南无限烤肉，浦口区，人均66元，评分4.7。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 145, name: "牛掰烧烤", emoji: "🍢",
+    category: "烤串", subCategory: "烤串", budget: "100以下",
+    avgPrice: 64, rating: 5,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "牛掰烧烤，浦口区，人均64元，评分5。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 146, name: "168龙虾·烧烤", emoji: "🦞",
+    category: "小龙虾", subCategory: "小龙虾", budget: "100-200",
+    avgPrice: 106, rating: 4.4,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "168龙虾·烧烤，浦口区，人均106元，评分4.4。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 147, name: "苏北大排档", emoji: "🍖",
+    category: "烤串", subCategory: "烤串", budget: "100以下",
+    avgPrice: 66, rating: 4.5,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "苏北大排档，浦口区，人均66元，评分4.5。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 148, name: "西塔老太太泥炉烤肉", emoji: "🥩",
+    category: "烤肉", subCategory: "烤肉", budget: "100-200",
+    avgPrice: 137, rating: 4.6,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "西塔老太太泥炉烤肉，浦口区，人均137元，评分4.6。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 149, name: "古鲁特烤肉自助餐厅", emoji: "🥩",
+    category: "烤肉", subCategory: "烤肉", budget: "100以下",
+    avgPrice: 54, rating: 4.9,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "古鲁特烤肉自助餐厅，浦口区，人均54元，评分4.9。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 150, name: "柳真真·云贵山岭烤肉", emoji: "🥩",
+    category: "烤肉", subCategory: "烤肉", budget: "100以下",
+    avgPrice: 88, rating: 4.1,
+    district: "江北新区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "柳真真·云贵山岭烤肉，江北新区，人均88元，评分4.1。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 151, name: "熙花道牧野烤肉", emoji: "🥩",
+    category: "烤肉", subCategory: "烤肉", budget: "100以下",
+    avgPrice: 85, rating: 4.1,
+    district: "秦淮区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "熙花道牧野烤肉，秦淮区，人均85元，评分4.1。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 152, name: "浦原·炭火烤肉", emoji: "🥩",
+    category: "烤肉", subCategory: "烤肉", budget: "100以下",
+    avgPrice: 81, rating: 4.6,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "浦原·炭火烤肉，浦口区，人均81元，评分4.6。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 153, name: "御牛道日式烤肉料理", emoji: "🥩",
+    category: "烤肉", subCategory: "烤肉", budget: "100-200",
+    avgPrice: 145, rating: 4.4,
+    district: "建邺区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "御牛道日式烤肉料理，建邺区，人均145元，评分4.4。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 154, name: "大霞烧烤 铜锅涮肉", emoji: "🍢",
+    category: "烤串", subCategory: "烤串", budget: "100以下",
+    avgPrice: 71, rating: 4.7,
+    district: "玄武区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "大霞烧烤 铜锅涮肉，玄武区，人均71元，评分4.7。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 155, name: "7只羊·鲜羊肉串·地锅鸡", emoji: "🍢",
+    category: "烤串", subCategory: "烤串", budget: "100以下",
+    avgPrice: 79, rating: 4.3,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "7只羊·鲜羊肉串·地锅鸡，浦口区，人均79元，评分4.3。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 156, name: "烤比客·旋转自助烤肉", emoji: "🥩",
+    category: "烤肉", subCategory: "烤肉", budget: "100以下",
+    avgPrice: 64, rating: 4.4,
+    district: "秦淮区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "烤比客·旋转自助烤肉，秦淮区，人均64元，评分4.4。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 157, name: "黑土地东北菜烧烤大排档", emoji: "🍖",
+    category: "烤串", subCategory: "烤串", budget: "100以下",
+    avgPrice: 68, rating: 4.6,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "黑土地东北菜烧烤大排档，浦口区，人均68元，评分4.6。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 158, name: "小马烧烤·龙虾海鲜大排档", emoji: "🦞",
+    category: "小龙虾", subCategory: "小龙虾", budget: "100以下",
+    avgPrice: 96, rating: 4.3,
+    district: "秦淮区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "小马烧烤·龙虾海鲜大排档，秦淮区，人均96元，评分4.3。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 159, name: "阿伟烧烤江湖菜", emoji: "🍢",
+    category: "烤串", subCategory: "烤串", budget: "100以下",
+    avgPrice: 68, rating: 4.7,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "阿伟烧烤江湖菜，浦口区，人均68元，评分4.7。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 160, name: "天天大排档·小龙虾·烧烤", emoji: "🦞",
+    category: "小龙虾", subCategory: "小龙虾", budget: "100以下",
+    avgPrice: 92, rating: 4.3,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "天天大排档·小龙虾·烧烤，浦口区，人均92元，评分4.3。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 161, name: "金大旺·大油边", emoji: "🍢",
+    category: "烤串", subCategory: "烤串", budget: "100以下",
+    avgPrice: 61, rating: 4.8,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "金大旺·大油边，浦口区，人均61元，评分4.8。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 162, name: "老虎滩大连海鲜烧烤", emoji: "🦐",
+    category: "烤串", subCategory: "烤串", budget: "100-200",
+    avgPrice: 108, rating: 4.4,
+    district: "建邺区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "老虎滩大连海鲜烧烤，建邺区，人均108元，评分4.4。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 163, name: "313羊庄·烧烤·龙虾", emoji: "🐏",
+    category: "火锅", subCategory: "火锅", budget: "100以下",
+    avgPrice: 93, rating: 4.9,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "313羊庄·烧烤·龙虾，浦口区，人均93元，评分4.9。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 164, name: "破店大油边烧烤店", emoji: "🍢",
+    category: "烤串", subCategory: "烤串", budget: "100以下",
+    avgPrice: 89, rating: 4.2,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "破店大油边烧烤店，浦口区，人均89元，评分4.2。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 165, name: "慈胖子烧烤", emoji: "🍢",
+    category: "烤串", subCategory: "烤串", budget: "100以下",
+    avgPrice: 68, rating: 5,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "慈胖子烧烤，浦口区，人均68元，评分5。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 166, name: "锦市御烧烤", emoji: "🍢",
+    category: "烤串", subCategory: "烤串", budget: "100以下",
+    avgPrice: 71, rating: 4.5,
+    district: "秦淮区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "锦市御烧烤，秦淮区，人均71元，评分4.5。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 167, name: "汉时月小排档烤龙虾", emoji: "🦞",
+    category: "小龙虾", subCategory: "小龙虾", budget: "100以下",
+    avgPrice: 59, rating: 4.6,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "汉时月小排档烤龙虾，浦口区，人均59元，评分4.6。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 168, name: "来虎肉食者·烤肉酒馆", emoji: "🥩",
+    category: "烤肉", subCategory: "烤肉", budget: "100以下",
+    avgPrice: 94, rating: 4.6,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "来虎肉食者·烤肉酒馆，浦口区，人均94元，评分4.6。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 169, name: "老狄龙虾·烧烤", emoji: "🦞",
+    category: "小龙虾", subCategory: "小龙虾", budget: "100以下",
+    avgPrice: 52, rating: 4.8,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "老狄龙虾·烧烤，浦口区，人均52元，评分4.8。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 170, name: "烤肉之王 King of Kings", emoji: "🥩",
+    category: "烤肉", subCategory: "烤肉", budget: "100以下",
+    avgPrice: 62, rating: 5,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "烤肉之王 King of Kings，浦口区，人均62元，评分5。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 171, name: "塞北烤羊腿·烤全羊·炭锅", emoji: "🐏",
+    category: "烤串", subCategory: "烤串", budget: "100以下",
+    avgPrice: 88, rating: 4.3,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "塞北烤羊腿·烤全羊·炭锅，浦口区，人均88元，评分4.3。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 172, name: "1只羊徐州鲜货烧烤", emoji: "🍢",
+    category: "烤串", subCategory: "烤串", budget: "100以下",
+    avgPrice: 62, rating: 4.6,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "1只羊徐州鲜货烧烤，浦口区，人均62元，评分4.6。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 173, name: "肉三寻·隔膜烧肉", emoji: "🥩",
+    category: "烤肉", subCategory: "烤肉", budget: "100以下",
+    avgPrice: 90, rating: 5,
+    district: "雨花台区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "肉三寻·隔膜烧肉，雨花台区，人均90元，评分5。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 174, name: "周老四烧烤", emoji: "🍢",
+    category: "烤串", subCategory: "烤串", budget: "100以下",
+    avgPrice: 75, rating: 4.7,
+    district: "江北新区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "周老四烧烤，江北新区，人均75元，评分4.7。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 175, name: "虾小仙龙虾·螃蟹烤鱼牛蛙", emoji: "🦞",
+    category: "小龙虾", subCategory: "小龙虾", budget: "100以下",
+    avgPrice: 86, rating: 4.6,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "虾小仙龙虾·螃蟹烤鱼牛蛙，浦口区，人均86元，评分4.6。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 176, name: "小院子东北菜·烧烤夜宵大排档", emoji: "🍖",
+    category: "烤串", subCategory: "烤串", budget: "100以下",
+    avgPrice: 81, rating: 4.5,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "小院子东北菜·烧烤夜宵大排档，浦口区，人均81元，评分4.5。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 177, name: "3只羊龙虾烧烤", emoji: "🦞",
+    category: "小龙虾", subCategory: "小龙虾", budget: "100以下",
+    avgPrice: 75, rating: 4.3,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "3只羊龙虾烧烤，浦口区，人均75元，评分4.3。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 178, name: "流浪泡泡·破破烂烂的烤肉店", emoji: "🥩",
+    category: "烤肉", subCategory: "烤肉", budget: "100以下",
+    avgPrice: 69, rating: 4.3,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "流浪泡泡·破破烂烂的烤肉店，浦口区，人均69元，评分4.3。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 179, name: "平房小老头自助烤串", emoji: "🥩",
+    category: "烤肉", subCategory: "烤肉", budget: "100以下",
+    avgPrice: 80, rating: 4.5,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "平房小老头自助烤串，浦口区，人均80元，评分4.5。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 180, name: "张巴适爆炒川味三绝", emoji: "🌶️",
+    category: "川湘", subCategory: "川湘", budget: "100以下",
+    avgPrice: 43, rating: 4.7,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "张巴适爆炒川味三绝，浦口区，人均43元，评分4.7。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 181, name: "至丰园饭店", emoji: "🍳",
+    category: "川湘", subCategory: "川湘", budget: "100以下",
+    avgPrice: 64, rating: 4.8,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "至丰园饭店，浦口区，人均64元，评分4.8。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 182, name: "桂叔爆炒三嫩·烧烤·小龙虾", emoji: "🌶️",
+    category: "川湘", subCategory: "川湘", budget: "100以下",
+    avgPrice: 40, rating: 4.5,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "桂叔爆炒三嫩·烧烤·小龙虾，浦口区，人均40元，评分4.5。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 183, name: "拾捌川·自贡爆炒", emoji: "🌶️",
+    category: "川湘", subCategory: "川湘", budget: "100以下",
+    avgPrice: 70, rating: 4.6,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "拾捌川·自贡爆炒，浦口区，人均70元，评分4.6。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 184, name: "岁月锦华·新融合淮扬菜湖景", emoji: "🍃",
+    category: "江浙融合", subCategory: "江浙融合", budget: "200-300",
+    avgPrice: 209, rating: 4.8,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "岁月锦华·新融合淮扬菜湖景，浦口区，人均209元，评分4.8。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 185, name: "香山湖渔家大院", emoji: "🐟",
+    category: "江浙融合", subCategory: "江浙融合", budget: "100-200",
+    avgPrice: 195, rating: 5,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "香山湖渔家大院，浦口区，人均195元，评分5。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 186, name: "江南人民公社", emoji: "🥬",
+    category: "江浙融合", subCategory: "江浙融合", budget: "100以下",
+    avgPrice: 57, rating: 4.3,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "江南人民公社，浦口区，人均57元，评分4.3。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 187, name: "浪里白·家宴", emoji: "🍃",
+    category: "江浙融合", subCategory: "江浙融合", budget: "100-200",
+    avgPrice: 110, rating: 4.6,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "浪里白·家宴，浦口区，人均110元，评分4.6。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 188, name: "南徽小菜·山野食材", emoji: "🥬",
+    category: "江浙融合", subCategory: "江浙融合", budget: "100以下",
+    avgPrice: 99, rating: 4.7,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "南徽小菜·山野食材，浦口区，人均99元，评分4.7。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 189, name: "汉时月·南京超级大排档", emoji: "🏠",
+    category: "江浙融合", subCategory: "江浙融合", budget: "100以下",
+    avgPrice: 79, rating: 4.4,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "汉时月·南京超级大排档，浦口区，人均79元，评分4.4。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 190, name: "溪山厨·老山土鸡", emoji: "🍗",
+    category: "江浙融合", subCategory: "江浙融合", budget: "100以下",
+    avgPrice: 64, rating: 4.5,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "溪山厨·老山土鸡，浦口区，人均64元，评分4.5。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 191, name: "本味·私房茶食馆", emoji: "🍵",
+    category: "江浙融合", subCategory: "江浙融合", budget: "100-200",
+    avgPrice: 107, rating: 4.5,
+    district: "鼓楼区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "本味·私房茶食馆，鼓楼区，人均107元，评分4.5。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 192, name: "高哆哆湘味爆炒王", emoji: "🌶️",
+    category: "川湘", subCategory: "川湘", budget: "100以下",
+    avgPrice: 55, rating: 4.5,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "高哆哆湘味爆炒王，浦口区，人均55元，评分4.5。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 193, name: "珠山茶艺馆·金陵老味道", emoji: "🍃",
+    category: "江浙融合", subCategory: "江浙融合", budget: "100-200",
+    avgPrice: 117, rating: 4.7,
+    district: "鼓楼区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "珠山茶艺馆·金陵老味道，鼓楼区，人均117元，评分4.7。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 194, name: "小食候湘", emoji: "🌶️",
+    category: "川湘", subCategory: "川湘", budget: "100以下",
+    avgPrice: 75, rating: 4.5,
+    district: "江北新区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "小食候湘，江北新区，人均75元，评分4.5。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 195, name: "雲間·膳食·宴请·私房菜", emoji: "🍃",
+    category: "江浙融合", subCategory: "江浙融合", budget: "100以下",
+    avgPrice: 89, rating: 4.6,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "雲間·膳食·宴请·私房菜，浦口区，人均89元，评分4.6。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 196, name: "乡味金陵江浦菜", emoji: "🏠",
+    category: "江浙融合", subCategory: "江浙融合", budget: "100以下",
+    avgPrice: 65, rating: 4.6,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "乡味金陵江浦菜，浦口区，人均65元，评分4.6。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 197, name: "锅飘飘·东北铁锅炖", emoji: "🍖",
+    category: "江浙融合", subCategory: "江浙融合", budget: "100以下",
+    avgPrice: 86, rating: 4.5,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "锅飘飘·东北铁锅炖，浦口区，人均86元，评分4.5。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 198, name: "宴归时·淮扬菜", emoji: "🍃",
+    category: "江浙融合", subCategory: "江浙融合", budget: "100-200",
+    avgPrice: 107, rating: 4.7,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "宴归时·淮扬菜，浦口区，人均107元，评分4.7。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 199, name: "桥林天寺·南京乡土菜行", emoji: "🏠",
+    category: "江浙融合", subCategory: "江浙融合", budget: "100以下",
+    avgPrice: 68, rating: 4.9,
+    district: "江北新区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "桥林天寺·南京乡土菜行，江北新区，人均68元，评分4.9。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 200, name: "鱼鲜美地石锅鱼土菜馆", emoji: "🐟",
+    category: "江浙融合", subCategory: "江浙融合", budget: "100以下",
+    avgPrice: 48, rating: 4.9,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "鱼鲜美地石锅鱼土菜馆，浦口区，人均48元，评分4.9。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 201, name: "金陵家宴·金陵春·南京菜", emoji: "🏠",
+    category: "江浙融合", subCategory: "江浙融合", budget: "100以下",
+    avgPrice: 88, rating: 4.7,
+    district: "秦淮区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "金陵家宴·金陵春·南京菜，秦淮区，人均88元，评分4.7。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 202, name: "香山湖华瑧大酒店", emoji: "🏨",
+    category: "江浙融合", subCategory: "江浙融合", budget: "100-200",
+    avgPrice: 124, rating: 4.9,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "香山湖华瑧大酒店，浦口区，人均124元，评分4.9。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 203, name: "蛙喔牛蛙", emoji: "🐸",
+    category: "川湘", subCategory: "川湘", budget: "100以下",
+    avgPrice: 80, rating: 5,
+    district: "建邺区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "蛙喔牛蛙，建邺区，人均80元，评分5。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 204, name: "地锅鸡现炒地锅鸡", emoji: "🍗",
+    category: "江浙融合", subCategory: "江浙融合", budget: "100以下",
+    avgPrice: 65, rating: 5,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "地锅鸡现炒地锅鸡，浦口区，人均65元，评分5。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 205, name: "江滩农家菜", emoji: "🏠",
+    category: "江浙融合", subCategory: "江浙融合", budget: "100以下",
+    avgPrice: 95, rating: 4.8,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "江滩农家菜，浦口区，人均95元，评分4.8。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 206, name: "土灶台地锅", emoji: "🍖",
+    category: "江浙融合", subCategory: "江浙融合", budget: "100以下",
+    avgPrice: 48, rating: 4.9,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "土灶台地锅，浦口区，人均48元，评分4.9。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 207, name: "丁记大排档", emoji: "🍖",
+    category: "江浙融合", subCategory: "江浙融合", budget: "100以下",
+    avgPrice: 46, rating: 4.5,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "丁记大排档，浦口区，人均46元，评分4.5。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 208, name: "淮扬人家·盱眙龙虾", emoji: "🦞",
+    category: "江浙融合", subCategory: "江浙融合", budget: "100以下",
+    avgPrice: 59, rating: 4.3,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "淮扬人家·盱眙龙虾，浦口区，人均59元，评分4.3。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 209, name: "山野板扎·云贵川Bistro", emoji: "🌶️",
+    category: "江浙融合", subCategory: "江浙融合", budget: "100以下",
+    avgPrice: 95, rating: 4.6,
+    district: "建邺区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "山野板扎·云贵川Bistro，建邺区，人均95元，评分4.6。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 210, name: "狮王府淮扬菜", emoji: "🍃",
+    category: "江浙融合", subCategory: "江浙融合", budget: "100-200",
+    avgPrice: 120, rating: 4.9,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "狮王府淮扬菜，浦口区，人均120元，评分4.9。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 211, name: "江核智荟·淮扬私厨", emoji: "🍃",
+    category: "江浙融合", subCategory: "江浙融合", budget: "100-200",
+    avgPrice: 123, rating: 4.9,
+    district: "江北新区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "江核智荟·淮扬私厨，江北新区，人均123元，评分4.9。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 212, name: "肆季荟·SEASONS", emoji: "🍽️",
+    category: "江浙融合", subCategory: "江浙融合", budget: "100-200",
+    avgPrice: 120, rating: 4.2,
+    district: "鼓楼区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "肆季荟·SEASONS，鼓楼区，人均120元，评分4.2。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 213, name: "卢大鲜鱼头捞饭", emoji: "🐟",
+    category: "江浙融合", subCategory: "江浙融合", budget: "100以下",
+    avgPrice: 94, rating: 4.4,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "卢大鲜鱼头捞饭，浦口区，人均94元，评分4.4。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 214, name: "右院·农家菜", emoji: "🏠",
+    category: "江浙融合", subCategory: "江浙融合", budget: "100以下",
+    avgPrice: 88, rating: 4.8,
+    district: "建邺区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "右院·农家菜，建邺区，人均88元，评分4.8。",
+    tags: [], recommend: [],
+    cover: ""
+  },
+  {
+    id: 215, name: "私房菜馆", emoji: "🏠",
+    category: "江浙融合", subCategory: "江浙融合", budget: "100以下",
+    avgPrice: 90, rating: 4.3,
+    district: "浦口区", distance: null, lng: null, lat: null,
+    address: "（待补充）", desc: "私房菜馆，浦口区，人均90元，评分4.3。",
+    tags: [], recommend: [],
+    cover: ""
+  },
 ];
 
+// BUDGETS that match data values
+const BUDGETS = [
+  { label: "全部", value: "全部" },
+  { label: "100以下", value: "100以下" },
+  { label: "100-200", value: "100-200" },
+  { label: "200-300", value: "200-300" },
+  { label: "300以上", value: "300以上" }
+];
+
+// Nanjing districts only (filter out OCR mis-detected ones)
 const DISTRICTS = [
-  { label:"全部", value:"全部" },
-  { label:"玄武区", value:"玄武区" },
-  { label:"鼓楼区", value:"鼓楼区" },
-  { label:"秦淮区", value:"秦淮区" },
-  { label:"建邺区", value:"建邺区" },
-  { label:"浦口区", value:"浦口区" },
+  { label: "全部", value: "全部" },
+  { label: "玄武区", value: "玄武区" },
+  { label: "鼓楼区", value: "鼓楼区" },
+  { label: "秦淮区", value: "秦淮区" },
+  { label: "建邺区", value: "建邺区" },
+  { label: "栖霞区", value: "栖霞区" },
+  { label: "江宁区", value: "江宁区" },
+  { label: "浦口区", value: "浦口区" },
+  { label: "雨花台区", value: "雨花台区" },
+  { label: "江北新区", value: "江北新区" }
 ];
 
 const CATEGORIES = [
-  { label:"全部", emoji:"🧡" },
-  { label:"火锅", emoji:"🍲" },
-  { label:"烤肉", emoji:"🥩" },
-  { label:"日料", emoji:"🍣" },
-  { label:"烧烤", emoji:"🍗" },
-  { label:"中餐·地方菜", emoji:"🥢" },
-  { label:"西餐", emoji:"🍝" },
-  { label:"东南亚菜", emoji:"🌴" },
-  { label:"其他", emoji:"🔮" },
+  { label: "全部", emoji: "🧡" },
+  { label: "火锅", emoji: "🍲" },
+  { label: "烤肉", emoji: "🥩" },
+  { label: "日料", emoji: "🍣" },
+  { label: "烧烤", emoji: "🍗" },
+  { label: "中餐·地方菜", emoji: "🥢" },
+  { label: "西餐", emoji: "🍝" },
+  { label: "东南亚", emoji: "🌴" },
+  { label: "南亚", emoji: "🫓" },
+  { label: "小龙虾", emoji: "🦞" },
+  { label: "烤串", emoji: "🍢" },
+  { label: "川湘", emoji: "🌶️" },
+  { label: "江浙融合", emoji: "🍃" },
+  { label: "其他", emoji: "🔮" }
 ];
 
-let filters = { category:"全部", budget:"全部", district:"全部" };
+// Budget range classification
+function budgetToRange(price) {
+  if (price == null) return "100以下";
+  if (price < 100) return "100以下";
+  if (price < 200) return "100-200";
+  if (price < 300) return "200-300";
+  return "300以上";
+}
+
+const BUDGET_BADGE = {
+  "100以下": "b-1",
+  "100-200": "b-2",
+  "200-300": "b-3",
+  "300以上": "b-4"
+};
+
+const BUDGET_LABEL = {
+  "100以下": "💚 100以下",
+  "100-200": "💙 100-200",
+  "200-300": "🧡 200-300",
+  "300以上": "💗 300以上"
+};
+
+const DEFAULT_COORD = { lng: 118.648028, lat: 32.055173, name: "望江悦府" };
+let userCoord = null;
+
+function haversineKm(a, b) {
+  if (!a || !b || a.lat == null || b.lat == null) return null;
+  const R = 6371;
+  const dLat = (b.lat - a.lat) * Math.PI / 180;
+  const dLng = (b.lng - a.lng) * Math.PI / 180;
+  const x = Math.sin(dLat / 2) ** 2 + Math.cos(a.lat * Math.PI / 180) * Math.cos(b.lat * Math.PI / 180) * Math.sin(dLng / 2) ** 2;
+  return R * 2 * Math.atan2(Math.sqrt(x), Math.sqrt(1 - x));
+}
+
+function getDistance(s) {
+  if (userCoord && s.lng != null && s.lat != null) {
+    return Math.round(haversineKm(userCoord, s) * 10) / 10;
+  }
+  return s.distance;
+}
+
+function distText(s) {
+  const d = getDistance(s);
+  return d == null ? "—" : d + " km";
+}
+
+function distPrefix() {
+  return userCoord ? "距您" : "距望江悦府";
+}
+
+// Normalize budget - some shops have "300以上随便吃", map to "300以上"
+function normalizeBudget(s) {
+  if (!s.budget) return budgetToRange(s.avgPrice);
+  if (s.budget.startsWith("300")) return "300以上";
+  return s.budget;
+}
+
+// Filter state
+let filters = { category: "全部", budget: "全部", district: "全部", subCategory: null };
+let filtered = [];
+let isSpinning = false;
+
+function applyFilters() {
+  filtered = shops.filter(s => {
+    const catOk = filters.category === "全部" || s.category === filters.category;
+    const budOk = filters.budget === "全部" || normalizeBudget(s) === filters.budget;
+    const disOk = filters.district === "全部" || s.district === filters.district;
+    const subOk = !filters.subCategory || s.subCategory === filters.subCategory;
+    return catOk && budOk && disOk && subOk;
+  });
+  renderSubTags();
+  renderCards();
+  updateCount();
+}
 
 function renderCategories() {
   const row = document.getElementById('categoryRow');
   if (!row) return;
   row.innerHTML = CATEGORIES.map(c =>
-    `<button class="cat-btn${filters.category===c.label?' active':''}" data-cat="${c.label}"><span class="emoji">${c.emoji}</span>${c.label}</button>`
+    `<button class="cat-btn${filters.category === c.label ? ' active' : ''}" data-cat="${c.label}"><span class="emoji">${c.emoji}</span>${c.label}</button>`
   ).join('');
   row.querySelectorAll('button').forEach(btn => {
     btn.addEventListener('click', () => {
       filters.category = btn.dataset.cat;
+      filters.subCategory = null;
       renderCategories();
-      console.log('Category:', filters.category);
+      applyFilters();
     });
   });
 }
@@ -133,13 +2270,13 @@ function renderBudgets() {
   const row = document.getElementById('budgetRow');
   if (!row) return;
   row.innerHTML = BUDGETS.map(b =>
-    `<button class="budget-btn${filters.budget===b.value?' active':''}" style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:12px;font-size:13px;font-weight:500;background:#fff;color:#888;border:1.5px solid #FFE0E6;cursor:pointer">${b.label}</button>`
+    `<button class="budget-btn${filters.budget === b.value ? ' active' : ''}">${b.label}</button>`
   ).join('');
-  row.querySelectorAll('button').forEach((btn,i) => {
+  row.querySelectorAll('button').forEach((btn, i) => {
     btn.addEventListener('click', () => {
       filters.budget = BUDGETS[i].value;
       renderBudgets();
-      console.log('Budget:', filters.budget);
+      applyFilters();
     });
   });
 }
@@ -148,31 +2285,239 @@ function renderDistricts() {
   const row = document.getElementById('districtRow');
   if (!row) return;
   row.innerHTML = DISTRICTS.map(d =>
-    `<button class="district-btn${filters.district===d.value?' active':''}" style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:12px;font-size:13px;font-weight:500;background:#fff;color:#888;border:1.5px solid #FFE0E6;cursor:pointer">${d.label}</button>`
+    `<button class="district-btn${filters.district === d.value ? ' active' : ''}">${d.label}</button>`
   ).join('');
-  row.querySelectorAll('button').forEach((btn,i) => {
+  row.querySelectorAll('button').forEach((btn, i) => {
     btn.addEventListener('click', () => {
       filters.district = DISTRICTS[i].value;
       renderDistricts();
-      console.log('District:', filters.district);
+      applyFilters();
     });
   });
 }
 
+function renderSubTags() {
+  const row = document.getElementById('subTagRow');
+  if (!row) return;
+  if (filters.category === "全部" || filtered.length === 0) {
+    row.innerHTML = '';
+    return;
+  }
+  const subs = [...new Set(filtered.map(s => s.subCategory).filter(Boolean))];
+  row.innerHTML = subs.map(sub =>
+    `<button class="sub-tag${filters.subCategory === sub ? ' active' : ''}">${sub}</button>`
+  ).join('');
+  row.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      filters.subCategory = filters.subCategory === btn.textContent ? null : btn.textContent;
+      renderSubTags();
+      applyFilters();
+    });
+  });
+}
+
+function shopCoverHtml(s) {
+  if (s.cover) {
+    return `<div class="shop-cover"><img src="${s.cover}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="emoji-fallback" style="display:none">${s.emoji || '🍽️'}</span></div>`;
+  }
+  return `<div class="shop-cover"><span class="emoji-fallback">${s.emoji || '🍽️'}</span></div>`;
+}
+
+function renderCards() {
+  const grid = document.getElementById('cardGrid');
+  const empty = document.getElementById('emptyState');
+  if (!grid) return;
+  if (filtered.length === 0) {
+    grid.innerHTML = '';
+    empty.classList.remove('hidden');
+  } else {
+    empty.classList.add('hidden');
+    grid.innerHTML = filtered.map(s => {
+      const bClass = BUDGET_BADGE[normalizeBudget(s)] || 'b-0';
+      const bLabel = BUDGET_LABEL[normalizeBudget(s)] || normalizeBudget(s);
+      const rating = s.rating ? `⭐${s.rating}` : '';
+      const dist = s.lng ? distText(s) : '';
+      return `
+        <div class="shop-card" data-id="${s.id}">
+          ${shopCoverHtml(s)}
+          <div class="shop-info">
+            <div class="shop-name">${s.name || '未命名'}</div>
+            <div class="shop-meta">
+              <span class="budget-badge ${bClass}">${bLabel}</span>
+              ${s.subCategory ? `<span>· ${s.subCategory}</span>` : ''}
+              ${s.district ? `<span>· ${s.district}</span>` : ''}
+            </div>
+            <div class="shop-bottom">
+              ${rating ? `<span class="shop-rating">${rating}</span>` : '<span></span>'}
+              ${dist ? `<span class="shop-distance">📍 ${distPrefix()} ${dist}</span>` : '<span></span>'}
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+    grid.querySelectorAll('.shop-card').forEach(card => {
+      card.addEventListener('click', () => showModal(parseInt(card.dataset.id)));
+    });
+  }
+}
+
+function updateCount() {
+  const el = document.getElementById('resultCount');
+  if (!el) return;
+  const catText = filters.category === "全部" ? "全品类" : filters.category;
+  el.textContent = `共 ${filtered.length} 家 · ${catText}`;
+}
+
+function showModal(id) {
+  const s = shops.find(x => x.id === id);
+  if (!s) return;
+
+  document.getElementById('modalName').textContent = s.name || '未命名';
+  document.getElementById('modalSubCat').textContent = [s.subCategory, s.district].filter(Boolean).join(' · ');
+
+  const cover = document.getElementById('modalCover');
+  if (s.cover) {
+    cover.innerHTML = `<img src="${s.cover}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="emoji-fallback" style="display:none">${s.emoji || '🍽️'}</span>`;
+  } else {
+    cover.innerHTML = `<span class="emoji-fallback">${s.emoji || '🍽️'}</span>`;
+  }
+
+  const meta = document.getElementById('modalMeta');
+  const bClass = BUDGET_BADGE[normalizeBudget(s)] || 'b-0';
+  const bLabel = BUDGET_LABEL[normalizeBudget(s)] || normalizeBudget(s);
+  meta.innerHTML = `
+    <span class="modal-meta-item budget-badge ${bClass}">${bLabel}</span>
+    ${s.rating ? `<span class="modal-meta-item">⭐ ${s.rating}</span>` : ''}
+    ${s.avgPrice ? `<span class="modal-meta-item">💰 人均 ¥${s.avgPrice}</span>` : ''}
+    ${s.lng ? `<span class="modal-meta-item">📍 ${distPrefix()} ${distText(s)}</span>` : ''}
+  `;
+
+  document.getElementById('modalDesc').textContent = s.desc || '';
+
+  const tagsEl = document.getElementById('modalTags');
+  const allTags = [...(s.tags || []), ...(s.recommend || [])];
+  tagsEl.innerHTML = allTags.length
+    ? allTags.map(t => `<span class="modal-tag">${t}</span>`).join('')
+    : '<span class="modal-tag">暂无标签</span>';
+
+  // Address (if has)
+  if (s.address && s.address !== '（待补充）') {
+    meta.innerHTML += `<span class="modal-meta-item" style="background:#F5F5F5;color:#666">📫 ${s.address}</span>`;
+  }
+
+  // Meituan & Dianping deep links (search by shop name)
+  const q = encodeURIComponent(s.name || '');
+  document.getElementById('modalDianping').href = `https://www.dianping.com/nanjing/ch05/r${q}`;
+  document.getElementById('modalMeituan').href = `https://i.meituan.com/awp/h5/article/search.html?keyword=${q}`;
+
+  document.getElementById('modal').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+});
+
+function useMyLocation() {
+  if (!navigator.geolocation) {
+    alert('当前浏览器不支持定位');
+    return;
+  }
+  const btn = document.getElementById('locBtn');
+  const st = document.getElementById('locStatus');
+  btn.textContent = '📍 定位中...';
+  navigator.geolocation.getCurrentPosition(
+    pos => {
+      userCoord = { lng: pos.coords.longitude, lat: pos.coords.latitude };
+      btn.textContent = '✅ 已用我的位置';
+      st.textContent = '距离已按你的实时位置计算';
+      renderCards();
+    },
+    () => {
+      btn.textContent = '📍 用我的位置';
+      st.textContent = '定位失败（需在 https 或手机浏览器下授权）';
+    },
+    { enableHighAccuracy: true, timeout: 8000 }
+  );
+}
+
+function spinRandom() {
+  if (isSpinning) return;
+  if (filtered.length === 0) {
+    alert('没有符合条件的店铺~');
+    return;
+  }
+  isSpinning = true;
+  const btn = document.getElementById('spinBtn');
+  btn.disabled = true;
+  btn.textContent = '🎲 抽取中...';
+
+  const spins = ['🎲', '🍽️', '✨', '🎯', '💕'];
+  let count = 0;
+  const interval = setInterval(() => {
+    btn.textContent = spins[count % spins.length] + ' 抽取中...';
+    count++;
+  }, 100);
+
+  setTimeout(() => {
+    clearInterval(interval);
+    const chosen = filtered[Math.floor(Math.random() * filtered.length)];
+    isSpinning = false;
+    btn.disabled = false;
+    btn.textContent = '🎲 再抽一次';
+    showSpinResult(chosen);
+    showModal(chosen.id);
+  }, 1500);
+}
+
+function showSpinResult(s) {
+  const el = document.getElementById('spinResult');
+  el.classList.remove('hidden');
+  const bLabel = BUDGET_LABEL[normalizeBudget(s)] || normalizeBudget(s);
+  el.innerHTML = `
+    <div style="font-size:36px;margin-bottom:8px">${s.emoji || '🍽️'}</div>
+    <div class="name">${s.name || '未命名'}</div>
+    <div class="meta">${[s.subCategory, s.district, bLabel].filter(Boolean).join(' · ')}</div>
+  `;
+}
+
+// Intro gate
 (function() {
   const yes = document.getElementById('introYes');
   const no = document.getElementById('introNo');
   const gate = document.getElementById('introGate');
-  if (!yes||!no||!gate) return;
+  if (!yes || !no || !gate) return;
 
-  no.addEventListener('click', () => { alert('再想想嘛 🙈'); });
+  let noTries = 0;
+  const noTexts = ['不愿意 🙈', '再想想嘛 🙈', '真的不愿意吗 🥺', '点愿意好不好 🥺', '就答应他嘛 💕'];
+
+  function fleeNo() {
+    noTries++;
+    const x = Math.max(16, Math.random() * (window.innerWidth - 180));
+    const y = Math.max(16, Math.random() * (window.innerHeight - 90));
+    no.classList.add('flee');
+    no.style.left = x + 'px';
+    no.style.top = y + 'px';
+    if (noTries < noTexts.length) no.textContent = noTexts[noTries];
+  }
+
+  no.addEventListener('mouseenter', fleeNo);
+  no.addEventListener('click', e => { e.preventDefault(); fleeNo(); });
+
   yes.addEventListener('click', () => {
     gate.style.opacity = '0';
     setTimeout(() => {
       gate.style.display = 'none';
+      // Initialize app
       renderCategories();
       renderBudgets();
       renderDistricts();
+      applyFilters();
     }, 350);
   });
 })();
